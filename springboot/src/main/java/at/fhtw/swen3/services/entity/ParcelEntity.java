@@ -1,4 +1,4 @@
-package at.fhtw.swen3.business;
+package at.fhtw.swen3.services.entity;
 
 import at.fhtw.swen3.persistence.Recipient;
 import lombok.Getter;
