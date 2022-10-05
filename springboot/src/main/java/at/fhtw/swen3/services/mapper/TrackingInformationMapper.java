@@ -9,14 +9,14 @@ public class TrackingInformationMapper extends AbstractMapper<TrackingInformatio
     @Override
     public ParcelEntity mapToTarget(TrackingInformation object) {
         return ParcelEntity.builder()
-                .state(object.getState())
+                .state(object.getState()).visitedHops(object.getVisitedHops()).futureHops(object.getFutureHops())
                 .build();
     }
 
     @Override
     public TrackingInformation mapToSource(ParcelEntity object) {
         return TrackingInformation.builder()
-                .state(object.getState())
+                .state(object.getState()).visitedHops(object.getVisitedHops()).futureHops(object.getFutureHops())
                 .build();
     }
 }

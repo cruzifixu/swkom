@@ -29,4 +29,28 @@ public class RecipientEntity {
     @Column
     private String country;
 
+    public String ValidRecipient()
+    {
+
+        return null;
+    }
+
+    public int ValidPostal()
+    {
+        if (postalCode == null || postalCode.equals("")) return 0;
+        if (postalCode.matches("[a|A]-\\d{4}")) return 1; // [a|A][-][0-9]{4}
+        return 2; // other country - not austria
+    }
+
+    public int ValidStreet()
+    {
+        if(street == null || street.equals("")) return 0;
+        if(street.matches("[a-zA-Z]+\\s\\d+([\\\\|a-z]\\d+[a-z]?)+")) return 1;
+        return 2; // not valid address
+    }
+    public int ValidCityName()
+    {
+
+        return 2; // not valid
+    }
 }
