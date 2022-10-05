@@ -1,4 +1,4 @@
-package at.fhtw.swen3.services.entity;
+package at.fhtw.swen3.persistence.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,17 +11,10 @@ import javax.persistence.*;
 
 
 public class RecipientEntity {
-    private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue
-    public Long getId() {
-        return id;
-    }
+    private Long id;
+
 
     @Column
     private String name;
