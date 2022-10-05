@@ -1,19 +1,19 @@
 package at.fhtw.swen3.services.mapper;
 
-import at.fhtw.swen3.services.dto.ParcelDto;
-import at.fhtw.swen3.services.entity.ParcelEntity;
+import at.fhtw.swen3.services.dto.Parcel;
+import at.fhtw.swen3.persistence.entity.ParcelEntity;
 
-public class ParcelMapper extends AbstractMapper<ParcelEntity, ParcelDto> {
+public class ParcelMapper extends AbstractMapper<ParcelEntity, Parcel> {
 
     @Override
-    public ParcelDto mapToTarget(ParcelEntity object){
-        return ParcelDto.builder()
+    public Parcel mapToTarget(ParcelEntity object){
+        return Parcel.builder()
                 .recipient(object.getRecipient())
                 .build();
     }
 
     @Override
-    public ParcelEntity mapToSource(ParcelDto object) {
+    public ParcelEntity mapToSource(Parcel object) {
         return ParcelEntity.builder()
                 .recipient(object.getRecipient())
                 .build();

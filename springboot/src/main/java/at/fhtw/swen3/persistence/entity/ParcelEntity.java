@@ -1,6 +1,6 @@
 package at.fhtw.swen3.persistence.entity;
 
-import at.fhtw.swen3.persistence.Recipient;
+import at.fhtw.swen3.services.dto.Recipient;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +12,9 @@ import javax.persistence.*;
 @Getter
 
 public class ParcelEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+    private int id;
     private Float weight;
     private Recipient recipient;
     private Recipient sender;

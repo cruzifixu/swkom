@@ -1,7 +1,7 @@
 package at.fhtw.swen3.services.dto;
 
 import java.util.Objects;
-import at.fhtw.swen3.persistence.HopArrival;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -28,7 +28,7 @@ import javax.annotation.Generated;
 @Setter
 @Getter
 
-public class TrackingInformationDto {
+public class TrackingInformation {
 
   /**
    * State of the parcel.
@@ -82,7 +82,7 @@ public class TrackingInformationDto {
   @Valid
   private List<HopArrival> futureHops = new ArrayList<>();
 
-  public TrackingInformationDto state(StateEnum state) {
+  public TrackingInformation state(StateEnum state) {
     this.state = state;
     return this;
   }
@@ -101,12 +101,12 @@ public class TrackingInformationDto {
     this.state = state;
   }
 
-  public TrackingInformationDto visitedHops(List<HopArrival> visitedHops) {
+  public TrackingInformation visitedHops(List<HopArrival> visitedHops) {
     this.visitedHops = visitedHops;
     return this;
   }
 
-  public TrackingInformationDto addVisitedHopsItem(HopArrival visitedHopsItem) {
+  public TrackingInformation addVisitedHopsItem(HopArrival visitedHopsItem) {
     this.visitedHops.add(visitedHopsItem);
     return this;
   }
@@ -125,12 +125,12 @@ public class TrackingInformationDto {
     this.visitedHops = visitedHops;
   }
 
-  public TrackingInformationDto futureHops(List<HopArrival> futureHops) {
+  public TrackingInformation futureHops(List<HopArrival> futureHops) {
     this.futureHops = futureHops;
     return this;
   }
 
-  public TrackingInformationDto addFutureHopsItem(HopArrival futureHopsItem) {
+  public TrackingInformation addFutureHopsItem(HopArrival futureHopsItem) {
     this.futureHops.add(futureHopsItem);
     return this;
   }
@@ -157,7 +157,7 @@ public class TrackingInformationDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TrackingInformationDto trackingInformation = (TrackingInformationDto) o;
+    TrackingInformation trackingInformation = (TrackingInformation) o;
     return Objects.equals(this.state, trackingInformation.state) &&
         Objects.equals(this.visitedHops, trackingInformation.visitedHops) &&
         Objects.equals(this.futureHops, trackingInformation.futureHops);

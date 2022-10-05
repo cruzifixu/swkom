@@ -1,7 +1,7 @@
 package at.fhtw.swen3.services.dto;
 
 import java.util.Objects;
-import at.fhtw.swen3.persistence.Recipient;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -25,7 +25,7 @@ import javax.annotation.Generated;
 @Setter
 @Getter
 
-public class ParcelDto {
+public class Parcel {
 
   @JsonProperty("weight")
   private Float weight;
@@ -40,7 +40,7 @@ public class ParcelDto {
   @JsonProperty("trackingId")
   private String trackingId;
 
-  public ParcelDto weight(Float weight) {
+  public Parcel weight(Float weight) {
     this.weight = weight;
     return this;
   }
@@ -59,7 +59,7 @@ public class ParcelDto {
     this.weight = weight;
   }
 
-  public ParcelDto recipient(Recipient recipient) {
+  public Parcel recipient(Recipient recipient) {
     this.recipient = recipient;
     return this;
   }
@@ -78,7 +78,7 @@ public class ParcelDto {
     this.recipient = recipient;
   }
 
-  public ParcelDto sender(Recipient sender) {
+  public Parcel sender(Recipient sender) {
     this.sender = sender;
     return this;
   }
@@ -105,7 +105,7 @@ public class ParcelDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ParcelDto parcel = (ParcelDto) o;
+    Parcel parcel = (Parcel) o;
     return Objects.equals(this.weight, parcel.weight) &&
         Objects.equals(this.recipient, parcel.recipient) &&
         Objects.equals(this.sender, parcel.sender);
