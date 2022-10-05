@@ -1,14 +1,16 @@
 package at.fhtw.swen3.persistence.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.internal.build.AllowPrintStacktrace;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
-
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class RecipientEntity {
     @Id

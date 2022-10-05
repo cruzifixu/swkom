@@ -8,14 +8,14 @@ public class ParcelMapper extends AbstractMapper<ParcelEntity, Parcel> {
     @Override
     public Parcel mapToTarget(ParcelEntity object){
         return Parcel.builder()
-                .recipient(object.getRecipient())
+                .weight(object.getWeight()).recipient(object.getRecipient()).sender(object.getSender()).trackingId(object.getTrackingId())
                 .build();
     }
 
     @Override
     public ParcelEntity mapToSource(Parcel object) {
         return ParcelEntity.builder()
-                .recipient(object.getRecipient())
+                .weight(object.getWeight()).recipient(object.getRecipient()).sender(object.getSender()).trackingId(object.getTrackingId())
                 .build();
     }
 }

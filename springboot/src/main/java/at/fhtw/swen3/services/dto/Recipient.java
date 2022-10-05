@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.annotation.Generated;
@@ -16,6 +19,8 @@ import javax.annotation.Generated;
 
 @JsonTypeName("recipient")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
+@Builder
+@Getter @Setter
 public class Recipient {
 
   @JsonProperty("name")
