@@ -38,25 +38,25 @@ public class ParcelEntity {
 
      */
 
-    public int ValidParcelWeight()
+    public int ValidParcelWeight(Float weight)
     {
         if(weight >= 0.0) return 1;
         return 0;
     }
 
-    public int ValidTrackingId()
+    public int ValidTrackingId(String trackingId)
     {
         if(trackingId.matches("^[A-Z\\d]{9}$")) return 1;
         return 0;
     }
 
-    public int ValidRecipient()
+    public int ValidRecipient(Recipient recipient)
     {
         if(recipient == null) return 0;
         return 1;
     }
 
-    public int ValidVisitedHops()
+    public int ValidVisitedHops(List<HopArrival> visitedHops)
     {
         if(visitedHops == null) return 0;
         for (HopArrival i : visitedHops)
@@ -67,7 +67,7 @@ public class ParcelEntity {
         return 1;
     }
 
-    public int ValidFutureHops()
+    public int ValidFutureHops(List<HopArrival> futureHops)
     {
         if(futureHops == null) return 0;
         for (HopArrival i : futureHops)
