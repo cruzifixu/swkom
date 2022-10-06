@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ParcelEntityTest {
 
     private ParcelEntity parcel;
-    
+
     @Test
     void ValidTrackingId()
     {
