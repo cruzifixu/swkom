@@ -4,6 +4,14 @@ import lombok.*;
 import org.hibernate.internal.build.AllowPrintStacktrace;
 
 import javax.persistence.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,42 +27,33 @@ public class RecipientEntity {
 
 
     @Column
+    @NotNull @NotBlank
+    @Pattern(regexp = "\\b([A-Z][a-z]+[- ]?|[A-Z][- '][A-Z]?[a-z]+[- ]?|[a-z]{1,2}[ -'][A-Z][a-z]+)+", message = "Invalid name")
     private String name;
     @Column
+    @NotNull @NotBlank
+    @Pattern(regexp = "[a-zA-Z]+\\s\\d+([\\\\|a-z]\\d+[a-z]?)+", message = "Invalid Street name")
     private String street;
     @Column
+    @NotNull @NotBlank
+    @Pattern(regexp = "[a|A]-\\d{4}", message = "Invalid Postal Code")
     private String postalCode;
     @Column
+    @NotNull @NotBlank
+    @Pattern(regexp = "\\b([A-Z][a-z]+[- ]?|[A-Z][- '][A-Z]?[a-z]+[- ]?|[a-z]{1,2}[ -'][A-Z][a-z]+)+", message = "Invalid City")
     private String city;
     @Column
     private String country;
 
-    /*
     
-    public String ValidRecipient()
+    public void ValidRecipient()
     {
+        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<RecipientEntity>> cV = validator.validate(this);
 
-        return null;
-    }
-
-     */
-    public int ValidPostal(String postalCode)
-    {
-        if (postalCode == null || postalCode.equals("")) return 0;
-        if (postalCode.matches("[a|A]-\\d{4}")) return 1; // [a|A][-][0-9]{4}
-        return 2; // other country - not austria
-    }
-
-    public int ValidStreet(String street)
-    {
-        if(street == null || street.equals("")) return 0;
-        if(street.matches("[a-zA-Z]+\\s\\d+([\\\\|a-z]\\d+[a-z]?)+")) return 1;
-        return 2; // not valid address
-    }
-    public int ValidCityName(String name)
-    {
-        if(name == null || name.equals("")) return 0; // empty
-        if(name.matches("\\b([A-Z][a-z]+[- ]?|[A-Z][- '][A-Z]?[a-z]+[- ]?|[a-z]{1,2}[ -'][A-Z][a-z]+)+")) return 1;
-        return 2; // not valid
+        for (ConstraintViolation<RecipientEntity> cv : cV) {
+            System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
+        }
     }
 }

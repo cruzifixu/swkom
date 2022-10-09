@@ -22,9 +22,11 @@ import javax.annotation.Generated;
 public class HopArrival {
 
   @JsonProperty("code")
+  @Pattern(regexp = "[A-Z]{4}\\d{1,4}$", message = "Invalid Code")
   private String code;
 
   @JsonProperty("description")
+  @Pattern(regexp = "[A-Za-z]{3,}\\s[1-9]+[-|\\d]?\\d+", message = "Invalid description")
   private String description;
 
   @JsonProperty("dateTime")

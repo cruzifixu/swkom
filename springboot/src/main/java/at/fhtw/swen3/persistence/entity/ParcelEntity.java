@@ -6,7 +6,13 @@ import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -18,47 +24,36 @@ public class ParcelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     private int id;
+    @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
+    @Size(min = 0, message = "A valid weight must at least weigh 0.0")
     private Float weight;
+    @NotNull(message = "Recipient cannot be Null")
     private Recipient recipient;
     private Recipient sender;
+    @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
+    @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
     private String value;
     private TrackingInformation.StateEnum state;
-    private List<HopArrival> visitedHops;
-    private List<HopArrival> futureHops;
+    @NotNull(message = "List cannot be Null")
+    private List<@Valid HopArrival> visitedHops;
+    @NotNull(message = "List cannot be Null")
+    private List<@Valid HopArrival> futureHops;
+
+    public void ValidParcel()
+    {
+        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<ParcelEntity>> cV = validator.validate(this);
+
+        for (ConstraintViolation<ParcelEntity> cv : cV) {
+            System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
+        }
+    }
 
     /*
-    for error handling in future
-    public String ValidParcel()
-    {
-           if()
-           error
-        return null;
-    }
-
-     */
-
-    public int ValidParcelWeight(Float weight)
-    {
-        if(weight >= 0.0) return 1;
-        return 0;
-    }
-
-    public int ValidTrackingId(String trackingId)
-    {
-        if(trackingId.matches("^[A-Z\\d]{9}$")) return 1;
-        return 0;
-    }
-
-    public int ValidRecipient(Recipient recipient)
-    {
-        if(recipient == null) return 0;
-        return 1;
-    }
-
     public int ValidVisitedHops(List<HopArrival> visitedHops)
     {
-        if(visitedHops == null) return 0;
         for (HopArrival i : visitedHops)
         {
             if(!i.getCode().matches("[A-Z]{4}\\d{1,4}$")) return 3;
@@ -69,7 +64,6 @@ public class ParcelEntity {
 
     public int ValidFutureHops(List<HopArrival> futureHops)
     {
-        if(futureHops == null) return 0;
         for (HopArrival i : futureHops)
         {
             if(!i.getCode().matches("[A-Z]{4}\\d{1,4}$")) return 3;
@@ -77,4 +71,6 @@ public class ParcelEntity {
         }
         return 1;
     }
+
+     */
 }
