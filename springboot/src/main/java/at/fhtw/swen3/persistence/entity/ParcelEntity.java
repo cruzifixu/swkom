@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-
+@Entity
 public class ParcelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
@@ -28,17 +28,17 @@ public class ParcelEntity {
     @Size(min = 0, message = "A valid weight must at least weigh 0.0")
     private Float weight;
     @NotNull(message = "Recipient cannot be Null")
-    private Recipient recipient;
-    private Recipient sender;
+    private transient Recipient recipient;
+    private transient Recipient sender;
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
     private String value;
     private TrackingInformation.StateEnum state;
     @NotNull(message = "List cannot be Null")
-    private List<@Valid HopArrival> visitedHops;
+    private transient List<@Valid HopArrival> visitedHops;
     @NotNull(message = "List cannot be Null")
-    private List<@Valid HopArrival> futureHops;
+    private transient List<@Valid HopArrival> futureHops;
 
     public void ValidParcel()
     {
