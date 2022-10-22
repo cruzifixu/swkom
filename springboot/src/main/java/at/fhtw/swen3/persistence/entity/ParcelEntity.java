@@ -27,9 +27,17 @@ public class ParcelEntity {
     @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
     @Size(min = 0, message = "A valid weight must at least weigh 0.0")
     private Float weight;
+
+    @ManyToOne
+    @JoinColumn(name="id")
     @NotNull(message = "Recipient cannot be Null")
-    private transient Recipient recipient;
-    private transient Recipient sender;
+    private transient RecipientEntity recipient;
+
+    @ManyToOne
+    @JoinColumn(name="id")
+    @NotNull(message = "Recipient cannot be Null")
+    private RecipientEntity sender;
+
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
