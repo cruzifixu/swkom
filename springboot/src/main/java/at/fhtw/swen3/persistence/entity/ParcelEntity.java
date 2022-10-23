@@ -23,7 +23,7 @@ import java.util.Set;
 public class ParcelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    private int id;
+    private Long id;
 
     @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
     @Size(min = 0, message = "A valid weight must at least weigh 0.0")
