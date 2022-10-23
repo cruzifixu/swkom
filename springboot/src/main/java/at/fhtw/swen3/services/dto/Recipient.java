@@ -53,6 +53,8 @@ public class Recipient {
     return name;
   }
 
+  public Recipient getRecipient(){ return this; }
+
   public void setName(String name) {
     this.name = name;
   }

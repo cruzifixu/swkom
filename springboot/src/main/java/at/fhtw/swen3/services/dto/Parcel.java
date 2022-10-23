@@ -2,10 +2,10 @@ package at.fhtw.swen3.services.dto;
 
 import java.util.Objects;
 
+import at.fhtw.swen3.persistence.entity.RecipientEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -68,9 +68,8 @@ public class Parcel {
    * Get recipient
    * @return recipient
   */
-  @NotNull @Valid 
   @Schema(name = "recipient", required = true)
-  public Recipient getRecipient() {
+  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getRecipient() {
     return recipient;
   }
 
@@ -87,9 +86,8 @@ public class Parcel {
    * Get sender
    * @return sender
   */
-  @NotNull @Valid 
   @Schema(name = "sender", required = true)
-  public Recipient getSender() {
+  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getSender() {
     return sender;
   }
 
