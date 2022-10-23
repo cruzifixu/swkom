@@ -18,6 +18,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "recipient")
 public class RecipientEntity {
     @Id
     @GeneratedValue
