@@ -2,10 +2,7 @@ package org.openapitools.business;
 
 import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.persistence.entity.RecipientEntity;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static at.fhtw.swen3.services.dto.TrackingInformation.StateEnum.PICKUP;
 
 public class ParcelEntityTest {
 

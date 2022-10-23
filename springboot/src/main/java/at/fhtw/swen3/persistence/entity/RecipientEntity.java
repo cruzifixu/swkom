@@ -1,7 +1,6 @@
 package at.fhtw.swen3.persistence.entity;
 
 import lombok.*;
-import org.hibernate.internal.build.AllowPrintStacktrace;
 
 import javax.persistence.*;
 import javax.validation.ConstraintViolation;
@@ -19,7 +18,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "recipient")
 public class RecipientEntity {
     @Id
     @GeneratedValue

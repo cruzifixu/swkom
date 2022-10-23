@@ -1,7 +1,6 @@
 package at.fhtw.swen3.persistence.entity;
 
 import at.fhtw.swen3.services.dto.HopArrival;
-import at.fhtw.swen3.services.dto.Recipient;
 import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
 
@@ -19,26 +18,36 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-
+@Entity
+@Table(name = "parcel")
 public class ParcelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    private int id;
+    private Long id;
+
     @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
     @Size(min = 0, message = "A valid weight must at least weigh 0.0")
     private Float weight;
+
+    @ManyToOne
+    @JoinColumn(name="fk_recipient")
     @NotNull(message = "Recipient cannot be Null")
-    private Recipient recipient;
-    private Recipient sender;
+    private transient RecipientEntity recipient;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_sender")
+    @NotNull(message = "Recipient cannot be Null")
+    private RecipientEntity sender;
+
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
     private String value;
     private TrackingInformation.StateEnum state;
     @NotNull(message = "List cannot be Null")
-    private List<@Valid HopArrival> visitedHops;
+    private transient List<@Valid HopArrival> visitedHops;
     @NotNull(message = "List cannot be Null")
-    private List<@Valid HopArrival> futureHops;
+    private transient List<@Valid HopArrival> futureHops;
 
     public void ValidParcel()
     {
