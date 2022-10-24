@@ -6,6 +6,8 @@ import at.fhtw.swen3.services.dto.Parcel;
 
 public class ParcelMapper extends AbstractMapper<ParcelEntity, Parcel> {
 
+    // TODO: Mapper has to be changed accordingly to the ParcelEntity and Parcel
+
     @Override
     public Parcel mapToTarget(ParcelEntity object){
         return Parcel.builder()
