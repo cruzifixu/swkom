@@ -37,14 +37,6 @@ public interface ParcelApi {
         return Optional.empty();
     }
 
-    /**
-     * POST /parcel/{trackingId}/reportDelivery/ : Report that a Parcel has been delivered at it&#39;s final destination address. 
-     *
-     * @param trackingId The tracking ID of the parcel. E.g. PYJRB4HZ6  (required)
-     * @return Successfully reported hop. (status code 200)
-     *         or The operation failed due to an error. (status code 400)
-     *         or Parcel does not exist with this tracking ID.  (status code 404)
-     */
     @Operation(
         operationId = "reportParcelDelivery",
         summary = "Report that a Parcel has been delivered at it's final destination address. ",
