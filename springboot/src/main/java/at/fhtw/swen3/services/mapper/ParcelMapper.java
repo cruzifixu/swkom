@@ -2,21 +2,10 @@ package at.fhtw.swen3.services.mapper;
 
 import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.services.dto.Parcel;
+import org.mapstruct.Mapper;
 
-
-public class ParcelMapper extends AbstractMapper<ParcelEntity, Parcel> {
-
-    @Override
-    public Parcel mapToTarget(ParcelEntity object){
-        return Parcel.builder()
-                .weight(object.getWeight()).recipient(object.getRecipient()).sender(object.getSender()).trackingId(object.getTrackingId())
-                .build();
-    }
-
-    @Override
-    public ParcelEntity mapToSource(Parcel object) {
-        return ParcelEntity.builder()
-                .weight(object.getWeight()).recipient(object.getRecipient()).sender(object.getSender()).trackingId(object.getTrackingId())
-                .build();
-    }
+@Mapper
+public interface ParcelMapper{
+    ParcelEntity mapToTarget(Parcel parcel);
+    Parcel mapToSource(ParcelEntity parcelDTO);
 }

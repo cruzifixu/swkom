@@ -69,7 +69,7 @@ public class Parcel {
    * @return recipient
   */
   @Schema(name = "recipient", required = true)
-  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getRecipient() {
+  public @NotNull(message = "Recipient cannot be Null") Recipient getRecipient() {
     return recipient;
   }
 
@@ -87,7 +87,7 @@ public class Parcel {
    * @return sender
   */
   @Schema(name = "sender", required = true)
-  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getSender() {
+  public @NotNull(message = "Recipient cannot be Null") Recipient getSender() {
     return sender;
   }
 

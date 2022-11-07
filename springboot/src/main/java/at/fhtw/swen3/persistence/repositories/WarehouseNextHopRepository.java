@@ -1,4 +1,4 @@
-package at.fhtw.swen3.model.repositories;
+package at.fhtw.swen3.persistence.repositories;
 
 import at.fhtw.swen3.persistence.entity.WarehouseNextHopEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
