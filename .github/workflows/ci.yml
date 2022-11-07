@@ -7,25 +7,16 @@ on:
     branches: [ "master" ]
 
 jobs:
-  #Build's job
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
-          with:
-            java-version: '17'
-            distribution: 'temurin'
-            cache: maven
-      #Set up Maven cache
-      - name: Cache Maven packages
-        #This action allows caching dependencies and build outputs to improve workflow execution time.
-        uses: actions/cache@v1
         with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
       #Build the application using Maven
       - name: Build with Maven
           run: mvn -B package --file springboot/pom.xml #mvn -B package -DskipTests --file pom.xml
@@ -59,8 +50,8 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
           use_existing_version_if_available: false
-          application_name: spring-boot-deploy
-          environment_name: Springbootdeploy-env
+          application_name: Swkomcd-env
+          environment_name: swkom_cd
           version_label: ${{github.SHA}}
           region: us-east-1
           deployment_package: data-0.0.1-SNAPSHOT.jar
