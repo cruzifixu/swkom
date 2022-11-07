@@ -1,7 +1,7 @@
 package org.openapitools.business;
 
 
-import at.fhtw.swen3.persistence.entity.Recipient;
+import at.fhtw.swen3.persistence.entity.RecipientEntity;
 import at.fhtw.swen3.persistence.repositories.ParcelRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public class ParcelEntityTest {
 
-    private Recipient recipient = new Recipient();
+    private RecipientEntity recipient = new RecipientEntity();
     private ParcelRepository parcel = new ParcelRepository() {
         @Override
         public List<ParcelRepository> findAll() {

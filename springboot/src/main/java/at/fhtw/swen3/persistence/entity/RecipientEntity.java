@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "recipient")
-public class Recipient {
+public class RecipientEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -49,9 +49,9 @@ public class Recipient {
     {
         ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         Validator validator = vf.getValidator();
-        Set<ConstraintViolation<Recipient>> cV = validator.validate(this);
+        Set<ConstraintViolation<RecipientEntity>> cV = validator.validate(this);
 
-        for (ConstraintViolation<Recipient> cv : cV) {
+        for (ConstraintViolation<RecipientEntity> cv : cV) {
             System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
         }
     }

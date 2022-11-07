@@ -2,7 +2,7 @@ package at.fhtw.swen3.services.dto;
 
 import java.util.Objects;
 
-import at.fhtw.swen3.persistence.entity.Recipient;
+import at.fhtw.swen3.persistence.entity.RecipientEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -31,10 +31,10 @@ public class Parcel {
   private Float weight;
 
   @JsonProperty("recipient")
-  private Recipient recipient;
+  private RecipientEntity recipient;
 
   @JsonProperty("sender")
-  private Recipient sender;
+  private RecipientEntity sender;
 
   // Tracking Id
   @JsonProperty("trackingId")
@@ -59,7 +59,7 @@ public class Parcel {
     this.weight = weight;
   }
 
-  public Parcel recipient(Recipient recipient) {
+  public Parcel recipient(RecipientEntity recipient) {
     this.recipient = recipient;
     return this;
   }
@@ -69,15 +69,15 @@ public class Parcel {
    * @return recipient
   */
   @Schema(name = "recipient", required = true)
-  public @NotNull(message = "Recipient cannot be Null") Recipient getRecipient() {
+  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getRecipient() {
     return recipient;
   }
 
-  public void setRecipient(Recipient recipient) {
+  public void setRecipient(RecipientEntity recipient) {
     this.recipient = recipient;
   }
 
-  public Parcel sender(Recipient sender) {
+  public Parcel sender(RecipientEntity sender) {
     this.sender = sender;
     return this;
   }
@@ -87,11 +87,11 @@ public class Parcel {
    * @return sender
   */
   @Schema(name = "sender", required = true)
-  public @NotNull(message = "Recipient cannot be Null") Recipient getSender() {
+  public @NotNull(message = "Recipient cannot be Null") RecipientEntity getSender() {
     return sender;
   }
 
-  public void setSender(Recipient sender) {
+  public void setSender(RecipientEntity sender) {
     this.sender = sender;
   }
 

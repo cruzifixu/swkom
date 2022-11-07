@@ -20,7 +20,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "parcel")
-public class Parcel {
+public class ParcelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     private Long id;
@@ -32,12 +32,12 @@ public class Parcel {
     @ManyToOne
     @JoinColumn(name="fk_recipient")
     @NotNull(message = "Recipient cannot be Null")
-    private transient Recipient recipient;
+    private transient RecipientEntity recipient;
 
     @ManyToOne
     @JoinColumn(name = "fk_sender")
     @NotNull(message = "Recipient cannot be Null")
-    private Recipient sender;
+    private RecipientEntity sender;
 
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
@@ -53,9 +53,9 @@ public class Parcel {
     {
         ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         Validator validator = vf.getValidator();
-        Set<ConstraintViolation<Parcel>> cV = validator.validate(this);
+        Set<ConstraintViolation<ParcelEntity>> cV = validator.validate(this);
 
-        for (ConstraintViolation<Parcel> cv : cV) {
+        for (ConstraintViolation<ParcelEntity> cv : cV) {
             System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
         }
     }
