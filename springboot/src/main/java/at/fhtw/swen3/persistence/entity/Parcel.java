@@ -1,5 +1,6 @@
 package at.fhtw.swen3.persistence.entity;
 
+import at.fhtw.swen3.persistence.repositories.ParcelEntity;
 import at.fhtw.swen3.services.dto.HopArrival;
 import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
@@ -20,7 +21,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "parcel")
-public class ParcelEntity {
+public class Parcel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     private Long id;
@@ -32,12 +33,12 @@ public class ParcelEntity {
     @ManyToOne
     @JoinColumn(name="fk_recipient")
     @NotNull(message = "Recipient cannot be Null")
-    private transient RecipientEntity recipient;
+    private transient Recipient recipient;
 
     @ManyToOne
     @JoinColumn(name = "fk_sender")
     @NotNull(message = "Recipient cannot be Null")
-    private RecipientEntity sender;
+    private Recipient sender;
 
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
@@ -53,9 +54,9 @@ public class ParcelEntity {
     {
         ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         Validator validator = vf.getValidator();
-        Set<ConstraintViolation<ParcelEntity>> cV = validator.validate(this);
+        Set<ConstraintViolation<Parcel>> cV = validator.validate(this);
 
-        for (ConstraintViolation<ParcelEntity> cv : cV) {
+        for (ConstraintViolation<Parcel> cv : cV) {
             System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
         }
     }
