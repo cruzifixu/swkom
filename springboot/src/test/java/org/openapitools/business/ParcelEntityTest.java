@@ -2,7 +2,7 @@ package org.openapitools.business;
 
 
 import at.fhtw.swen3.persistence.entity.Recipient;
-import at.fhtw.swen3.persistence.repositories.ParcelEntity;
+import at.fhtw.swen3.persistence.repositories.ParcelRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -17,24 +17,24 @@ import java.util.function.Function;
 public class ParcelEntityTest {
 
     private Recipient recipient = new Recipient();
-    private ParcelEntity parcel = new ParcelEntity() {
+    private ParcelRepository parcel = new ParcelRepository() {
         @Override
-        public List<ParcelEntity> findAll() {
+        public List<ParcelRepository> findAll() {
             return null;
         }
 
         @Override
-        public List<ParcelEntity> findAll(Sort sort) {
+        public List<ParcelRepository> findAll(Sort sort) {
             return null;
         }
 
         @Override
-        public Page<ParcelEntity> findAll(Pageable pageable) {
+        public Page<ParcelRepository> findAll(Pageable pageable) {
             return null;
         }
 
         @Override
-        public List<ParcelEntity> findAllById(Iterable<Long> longs) {
+        public List<ParcelRepository> findAllById(Iterable<Long> longs) {
             return null;
         }
 
@@ -49,7 +49,7 @@ public class ParcelEntityTest {
         }
 
         @Override
-        public void delete(ParcelEntity entity) {
+        public void delete(ParcelRepository entity) {
 
         }
 
@@ -59,7 +59,7 @@ public class ParcelEntityTest {
         }
 
         @Override
-        public void deleteAll(Iterable<? extends ParcelEntity> entities) {
+        public void deleteAll(Iterable<? extends ParcelRepository> entities) {
 
         }
 
@@ -69,17 +69,17 @@ public class ParcelEntityTest {
         }
 
         @Override
-        public <S extends ParcelEntity> S save(S entity) {
+        public <S extends ParcelRepository> S save(S entity) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> List<S> saveAll(Iterable<S> entities) {
+        public <S extends ParcelRepository> List<S> saveAll(Iterable<S> entities) {
             return null;
         }
 
         @Override
-        public Optional<ParcelEntity> findById(Long aLong) {
+        public Optional<ParcelRepository> findById(Long aLong) {
             return Optional.empty();
         }
 
@@ -94,17 +94,17 @@ public class ParcelEntityTest {
         }
 
         @Override
-        public <S extends ParcelEntity> S saveAndFlush(S entity) {
+        public <S extends ParcelRepository> S saveAndFlush(S entity) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> List<S> saveAllAndFlush(Iterable<S> entities) {
+        public <S extends ParcelRepository> List<S> saveAllAndFlush(Iterable<S> entities) {
             return null;
         }
 
         @Override
-        public void deleteAllInBatch(Iterable<ParcelEntity> entities) {
+        public void deleteAllInBatch(Iterable<ParcelRepository> entities) {
 
         }
 
@@ -119,57 +119,57 @@ public class ParcelEntityTest {
         }
 
         @Override
-        public ParcelEntity getOne(Long aLong) {
+        public ParcelRepository getOne(Long aLong) {
             return null;
         }
 
         @Override
-        public ParcelEntity getById(Long aLong) {
+        public ParcelRepository getById(Long aLong) {
             return null;
         }
 
         @Override
-        public ParcelEntity getReferenceById(Long aLong) {
+        public ParcelRepository getReferenceById(Long aLong) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> Optional<S> findOne(Example<S> example) {
+        public <S extends ParcelRepository> Optional<S> findOne(Example<S> example) {
             return Optional.empty();
         }
 
         @Override
-        public <S extends ParcelEntity> List<S> findAll(Example<S> example) {
+        public <S extends ParcelRepository> List<S> findAll(Example<S> example) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> List<S> findAll(Example<S> example, Sort sort) {
+        public <S extends ParcelRepository> List<S> findAll(Example<S> example, Sort sort) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> Page<S> findAll(Example<S> example, Pageable pageable) {
+        public <S extends ParcelRepository> Page<S> findAll(Example<S> example, Pageable pageable) {
             return null;
         }
 
         @Override
-        public <S extends ParcelEntity> long count(Example<S> example) {
+        public <S extends ParcelRepository> long count(Example<S> example) {
             return 0;
         }
 
         @Override
-        public <S extends ParcelEntity> boolean exists(Example<S> example) {
+        public <S extends ParcelRepository> boolean exists(Example<S> example) {
             return false;
         }
 
         @Override
-        public <S extends ParcelEntity, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+        public <S extends ParcelRepository, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
             return null;
         }
 
         @Override
-        public List<ParcelEntity> findByTrackingId(String trackingId) {
+        public List<ParcelRepository> findByTrackingId(String trackingId) {
             return null;
         }
     };

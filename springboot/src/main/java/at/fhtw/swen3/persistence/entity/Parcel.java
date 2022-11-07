@@ -1,6 +1,5 @@
 package at.fhtw.swen3.persistence.entity;
 
-import at.fhtw.swen3.persistence.repositories.ParcelEntity;
 import at.fhtw.swen3.services.dto.HopArrival;
 import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
