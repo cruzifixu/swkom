@@ -9,5 +9,5 @@ import org.mapstruct.Mapper;
 public interface ParcelMapper{
     ParcelEntity mapToTarget(Parcel parcel);
     Parcel mapToSource(ParcelEntity parcelDTO);
-    // jhwvkhfewbfdhkxewbfhs
+    //
 }
