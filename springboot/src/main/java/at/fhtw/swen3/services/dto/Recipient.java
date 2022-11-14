@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -16,7 +17,7 @@ import javax.annotation.Generated;
 /**
  * Recipient
  */
-
+@Slf4j
 @JsonTypeName("recipient")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 @Builder
@@ -57,10 +58,12 @@ public class Recipient {
 
   public void setName(String name) {
     this.name = name;
+    log.info("name set to {}", this.name);
   }
 
   public Recipient street(String street) {
     this.street = street;
+    log.info("street set to {}", this.street);
     return this;
   }
 
@@ -76,10 +79,12 @@ public class Recipient {
 
   public void setStreet(String street) {
     this.street = street;
+    log.info("street set to {}", this.street);
   }
 
   public Recipient postalCode(String postalCode) {
     this.postalCode = postalCode;
+    log.info("postalCode set to {}", this.postalCode);
     return this;
   }
 
@@ -95,10 +100,12 @@ public class Recipient {
 
   public void setPostalCode(String postalCode) {
     this.postalCode = postalCode;
+    log.info("postalCode set to {}", this.postalCode);
   }
 
   public Recipient city(String city) {
     this.city = city;
+    log.info("city set to {}", this.city);
     return this;
   }
 
@@ -114,10 +121,12 @@ public class Recipient {
 
   public void setCity(String city) {
     this.city = city;
+    log.info("city set to {}", this.city);
   }
 
   public Recipient country(String country) {
     this.country = country;
+    log.info("country set to {}", this.country);
     return this;
   }
 
@@ -133,6 +142,7 @@ public class Recipient {
 
   public void setCountry(String country) {
     this.country = country;
+    log.info("country set to {}", this.country);
   }
 
   @Override
@@ -166,6 +176,7 @@ public class Recipient {
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 

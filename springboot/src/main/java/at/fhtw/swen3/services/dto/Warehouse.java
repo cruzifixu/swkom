@@ -9,6 +9,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -18,6 +19,7 @@ import javax.annotation.Generated;
  */
 
 
+@Slf4j
 @JsonTypeName("warehouse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 public class Warehouse extends Hop {
@@ -31,6 +33,7 @@ public class Warehouse extends Hop {
 
   public Warehouse level(Integer level) {
     this.level = level;
+    log.info("level set to {}", this.level);
     return this;
   }
 
@@ -46,15 +49,18 @@ public class Warehouse extends Hop {
 
   public void setLevel(Integer level) {
     this.level = level;
+    log.info("level set to {}", this.level);
   }
 
   public Warehouse nextHops(List<WarehouseNextHops> nextHops) {
     this.nextHops = nextHops;
+    log.info("nextHops set to {}", this.nextHops);
     return this;
   }
 
   public Warehouse addNextHopsItem(WarehouseNextHops nextHopsItem) {
     this.nextHops.add(nextHopsItem);
+    log.info("nextHops add set to {}", this.nextHops);
     return this;
   }
 
@@ -70,6 +76,7 @@ public class Warehouse extends Hop {
 
   public void setNextHops(List<WarehouseNextHops> nextHops) {
     this.nextHops = nextHops;
+    log.info("nextHops set to {}", this.nextHops);
   }
 
   public Warehouse hopType(String hopType) {
@@ -129,6 +136,7 @@ public class Warehouse extends Hop {
     sb.append("    level: ").append(toIndentedString(level)).append("\n");
     sb.append("    nextHops: ").append(toIndentedString(nextHops)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 
