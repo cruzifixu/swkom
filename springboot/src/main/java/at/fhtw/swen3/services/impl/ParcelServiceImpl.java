@@ -15,7 +15,6 @@ public class ParcelServiceImpl extends ParcelService {
         return ;
     }
     */
-
     public ParcelServiceImpl(ParcelLogic parcelLogic) {
         super(parcelLogic);
     }
