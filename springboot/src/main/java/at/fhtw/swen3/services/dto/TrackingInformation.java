@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -20,6 +21,7 @@ import javax.annotation.Generated;
  * TrackingInformation
  */
 
+@Slf4j
 @JsonTypeName("trackingInformation")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 @Builder
@@ -48,6 +50,7 @@ public class TrackingInformation {
 
     StateEnum(String value) {
       this.value = value;
+      log.info("value set to {}", this.value);
     }
 
     @JsonValue
@@ -84,6 +87,7 @@ public class TrackingInformation {
 
   public TrackingInformation state(StateEnum state) {
     this.state = state;
+    log.info("state set to {}", this.state);
     return this;
   }
 
@@ -99,10 +103,12 @@ public class TrackingInformation {
 
   public void setState(StateEnum state) {
     this.state = state;
+    log.info("state set to {}", this.state);
   }
 
   public TrackingInformation visitedHops(List<HopArrival> visitedHops) {
     this.visitedHops = visitedHops;
+    log.info("visitedHops set to {}", this.visitedHops);
     return this;
   }
 
@@ -123,10 +129,12 @@ public class TrackingInformation {
 
   public void setVisitedHops(List<HopArrival> visitedHops) {
     this.visitedHops = visitedHops;
+    log.info("visitedHops set to {}", this.visitedHops);
   }
 
   public TrackingInformation futureHops(List<HopArrival> futureHops) {
     this.futureHops = futureHops;
+    log.info("futureHops set to {}", this.futureHops);
     return this;
   }
 
@@ -147,6 +155,7 @@ public class TrackingInformation {
 
   public void setFutureHops(List<HopArrival> futureHops) {
     this.futureHops = futureHops;
+    log.info("futureHops set to {}", this.futureHops);
   }
 
   @Override
@@ -176,6 +185,7 @@ public class TrackingInformation {
     sb.append("    visitedHops: ").append(toIndentedString(visitedHops)).append("\n");
     sb.append("    futureHops: ").append(toIndentedString(futureHops)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 

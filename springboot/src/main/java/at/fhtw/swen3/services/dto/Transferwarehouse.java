@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -15,7 +16,7 @@ import javax.annotation.Generated;
  * Transferwarehouse
  */
 
-
+@Slf4j
 @JsonTypeName("transferwarehouse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 public class Transferwarehouse extends Hop {
@@ -31,6 +32,7 @@ public class Transferwarehouse extends Hop {
 
   public Transferwarehouse regionGeoJson(String regionGeoJson) {
     this.regionGeoJson = regionGeoJson;
+    log.info("regionGeo set to {}", this.regionGeoJson);
     return this;
   }
 
@@ -46,10 +48,12 @@ public class Transferwarehouse extends Hop {
 
   public void setRegionGeoJson(String regionGeoJson) {
     this.regionGeoJson = regionGeoJson;
+    log.info("regionGeo set to {}", this.regionGeoJson);
   }
 
   public Transferwarehouse logisticsPartner(String logisticsPartner) {
     this.logisticsPartner = logisticsPartner;
+    log.info("logisticsPartner set to {}", this.logisticsPartner);
     return this;
   }
 
@@ -65,10 +69,12 @@ public class Transferwarehouse extends Hop {
 
   public void setLogisticsPartner(String logisticsPartner) {
     this.logisticsPartner = logisticsPartner;
+    log.info("logisticsPartner set to {}", this.logisticsPartner);
   }
 
   public Transferwarehouse logisticsPartnerUrl(String logisticsPartnerUrl) {
     this.logisticsPartnerUrl = logisticsPartnerUrl;
+    log.info("logisticsPartnerUrl set to {}", this.logisticsPartnerUrl);
     return this;
   }
 
@@ -84,6 +90,7 @@ public class Transferwarehouse extends Hop {
 
   public void setLogisticsPartnerUrl(String logisticsPartnerUrl) {
     this.logisticsPartnerUrl = logisticsPartnerUrl;
+    log.info("logisticsPartnerUrl set to {}", this.logisticsPartnerUrl);
   }
 
   public Transferwarehouse hopType(String hopType) {
@@ -145,6 +152,7 @@ public class Transferwarehouse extends Hop {
     sb.append("    logisticsPartner: ").append(toIndentedString(logisticsPartner)).append("\n");
     sb.append("    logisticsPartnerUrl: ").append(toIndentedString(logisticsPartnerUrl)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 

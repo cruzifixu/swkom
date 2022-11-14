@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
@@ -16,7 +18,7 @@ import javax.annotation.Generated;
 /**
  * HopArrival
  */
-
+@Slf4j
 @JsonTypeName("hopArrival")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 public class HopArrival {
@@ -35,6 +37,7 @@ public class HopArrival {
 
   public HopArrival code(String code) {
     this.code = code;
+    log.info("code set to {}", this.code);
     return this;
   }
 
@@ -50,10 +53,12 @@ public class HopArrival {
 
   public void setCode(String code) {
     this.code = code;
+    log.info("code set to {}", this.code);
   }
 
   public HopArrival description(String description) {
     this.description = description;
+    log.info("description set to {}", this.description);
     return this;
   }
 
@@ -69,10 +74,12 @@ public class HopArrival {
 
   public void setDescription(String description) {
     this.description = description;
+    log.info("description set to {}", this.description);
   }
 
   public HopArrival dateTime(OffsetDateTime dateTime) {
     this.dateTime = dateTime;
+    log.info("date time set to {}", this.dateTime);
     return this;
   }
 
@@ -88,6 +95,7 @@ public class HopArrival {
 
   public void setDateTime(OffsetDateTime dateTime) {
     this.dateTime = dateTime;
+    log.info("date time set to {}", this.code);
   }
 
   @Override
@@ -117,6 +125,7 @@ public class HopArrival {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    dateTime: ").append(toIndentedString(dateTime)).append("\n");
     sb.append("}");
+    log.info("string builder:\n {}", sb);
     return sb.toString();
   }
 

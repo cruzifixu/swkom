@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -14,6 +15,7 @@ import javax.annotation.Generated;
  * GeoCoordinate
  */
 
+@Slf4j
 @JsonTypeName("geoCoordinate")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 public class GeoCoordinate {
@@ -41,10 +43,12 @@ public class GeoCoordinate {
 
   public void setLat(Double lat) {
     this.lat = lat;
+    log.info("lat set to {}", this.lat);
   }
 
   public GeoCoordinate lon(Double lon) {
     this.lon = lon;
+    log.info("lon set to {}", this.lon);
     return this;
   }
 
@@ -60,6 +64,7 @@ public class GeoCoordinate {
 
   public void setLon(Double lon) {
     this.lon = lon;
+    log.info("lon set to {}", this.lon);
   }
 
   @Override
@@ -87,6 +92,7 @@ public class GeoCoordinate {
     sb.append("    lat: ").append(toIndentedString(lat)).append("\n");
     sb.append("    lon: ").append(toIndentedString(lon)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 
