@@ -6,12 +6,12 @@ import lombok.RequiredArgsConstructor;
 
 
 public class ParcelServiceImpl extends ParcelService {
+
     /*
     public ParcelLogic(ParcelRepository repo)
     {
         return ;
     }
-
      */
 
     public ParcelServiceImpl(ParcelLogic parcelLogic) {
