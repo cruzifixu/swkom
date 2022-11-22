@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 
 import javax.annotation.Generated;
@@ -16,7 +17,7 @@ import javax.annotation.Generated;
 /**
  * Parcel
  */
-
+@Slf4j
 @JsonTypeName("parcel")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
 @Builder
@@ -42,6 +43,7 @@ public class Parcel {
 
   public Parcel weight(Float weight) {
     this.weight = weight;
+    log.info("weight set to {}", this.weight);
     return this;
   }
 
@@ -57,10 +59,12 @@ public class Parcel {
 
   public void setWeight(Float weight) {
     this.weight = weight;
+    log.info("weight set to {}", this.weight);
   }
 
   public Parcel recipient(RecipientEntity recipient) {
     this.recipient = recipient;
+    log.info("recipient set to {}", this.recipient);
     return this;
   }
 
@@ -75,10 +79,12 @@ public class Parcel {
 
   public void setRecipient(RecipientEntity recipient) {
     this.recipient = recipient;
+    log.info("recipient set to {}", this.recipient);
   }
 
   public Parcel sender(RecipientEntity sender) {
     this.sender = sender;
+    log.info("sender set to {}", this.sender);
     return this;
   }
 
@@ -93,6 +99,7 @@ public class Parcel {
 
   public void setSender(RecipientEntity sender) {
     this.sender = sender;
+    log.info("sender set to {}", this.sender);
   }
 
   @Override
@@ -122,6 +129,7 @@ public class Parcel {
     sb.append("    recipient: ").append(toIndentedString(recipient)).append("\n");
     sb.append("    sender: ").append(toIndentedString(sender)).append("\n");
     sb.append("}");
+    log.info("string builder:\n{}", sb);
     return sb.toString();
   }
 
