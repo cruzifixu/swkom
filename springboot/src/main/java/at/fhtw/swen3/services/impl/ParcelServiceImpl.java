@@ -9,7 +9,6 @@ import at.fhtw.swen3.services.dto.Parcel;
 import at.fhtw.swen3.services.mapper.ParcelMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
