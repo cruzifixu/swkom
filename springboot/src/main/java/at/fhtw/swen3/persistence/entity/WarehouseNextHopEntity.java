@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -18,6 +20,8 @@ public class WarehouseNextHopEntity {
     @Column
     private Long id;
     @Column
+    @NotNull
+    @Min(0)
     private Integer traveltimeMins;
     @OneToOne
     private HopEntity hop;

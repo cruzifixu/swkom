@@ -1,16 +1,15 @@
 package at.fhtw.swen3.services;
 
-import at.fhtw.swen3.persistence.repositories.ParcelRepository;
+import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.services.dto.Parcel;
-import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
-public class ParcelService {
+import java.util.Collection;
 
-    private final ParcelLogic parcelLogic;
+@Service
+public interface ParcelService {
 
-    public String getStorage(Parcel parcel) {
-        return parcelLogic.getStorage(parcel);
-    }
+    void submitNewParcel(ParcelEntity parcelEntity);
+    Collection<Parcel> getStorage();
 
 }
