@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Builder
@@ -17,10 +18,12 @@ import javax.persistence.*;
 public class HopEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
     @Column
     private String hopType;
     @Column
+    @Pattern(regexp = "^[A-Za-zÄÖÜäöü0-9\\s\\-]+$")
     private String code;
     @Column
     private String description;

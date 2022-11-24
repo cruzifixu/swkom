@@ -1,26 +1,46 @@
 package at.fhtw.swen3.services.impl;
 
+
+import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.persistence.repositories.ParcelRepository;
-import at.fhtw.swen3.services.ParcelLogic;
+import at.fhtw.swen3.persistence.repositories.RecipientRepository;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.Parcel;
+import at.fhtw.swen3.services.mapper.ParcelMapperImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
-public class ParcelServiceImpl extends ParcelService {
+@RequiredArgsConstructor
+public class ParcelServiceImpl implements ParcelService {
 
-    /*
-    public ParcelLogic(ParcelRepository repo)
-    {
-        return ;
+    @Autowired
+    private final ParcelRepository parcelRepository;
+
+    @Autowired
+    private final RecipientRepository recipientRepository;
+
+    @Override
+    public void submitNewParcel(ParcelEntity parcelEntity) {
+        recipientRepository.save(parcelEntity.getRecipient());
+        recipientRepository.save(parcelEntity.getSender());
+        parcelRepository.save(parcelEntity);
     }
-    */
 
-    public ParcelServiceImpl(ParcelLogic parcelLogic) {
-        super(parcelLogic);
-    }
+    @Override
+    public Collection<Parcel> getStorage() {
+        List<Parcel> parcelDtos = new ArrayList<>();
+        List<ParcelEntity> parcelEntities = parcelRepository.findAll();
+        ParcelMapperImpl parcelMapper = new ParcelMapperImpl();
 
-    public void submitnewParcle() {
+        for(ParcelEntity parcelEntity : parcelEntities) {
 
+            parcelDtos.add(parcelMapper.entityToDto(parcelEntity));
+        }
+        return parcelDtos;
     }
 }
