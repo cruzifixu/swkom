@@ -7,7 +7,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface ParcelMapper{
-    ParcelEntity mapToTarget(Parcel parcel);
-    Parcel mapToSource(ParcelEntity parcelDTO);
-    // mvmhbkjbljbljb
+    Parcel entityToDto(ParcelEntity parcelEntity);
+    ParcelEntity dtoToEntity(Parcel parcel);
 }

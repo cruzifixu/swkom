@@ -20,8 +20,6 @@ import javax.annotation.Generated;
 @Slf4j
 @JsonTypeName("recipient")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-09-24T14:48:00.085786Z[Etc/UTC]")
-@Builder
-@Getter @Setter
 public class Recipient {
 
   @JsonProperty("name")

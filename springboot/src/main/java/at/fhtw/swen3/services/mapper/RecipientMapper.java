@@ -6,6 +6,6 @@ import at.fhtw.swen3.services.dto.Recipient;
 // id, name, street, postal code, city country
 @Mapper
 public interface RecipientMapper {
-    Recipient mapToTarget(RecipientEntity recipient);
-    RecipientEntity mapToSource(Recipient recipient);
+    Recipient entityToDto(RecipientEntity recipientEntity);
+    RecipientEntity dtoToEntity(Recipient recipient);
 }
