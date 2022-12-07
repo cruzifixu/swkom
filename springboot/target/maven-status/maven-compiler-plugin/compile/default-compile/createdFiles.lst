@@ -16,13 +16,11 @@ at\fhtw\swen3\persistence\entity\TruckEntity$TruckEntityBuilder.class
 at\fhtw\swen3\configuration\SpringDocConfiguration.class
 at\fhtw\swen3\gps\service\impl\OpenStreetMapsProxy.class
 at\fhtw\swen3\services\impl\ParcelServiceImpl.class
-at\fhtw\swen3\persistence\repositories\TransferwarehouseRepository.class
 at\fhtw\swen3\persistence\entity\RecipientEntity$RecipientEntityBuilder.class
 at\fhtw\swen3\controller\rest\ApiUtil.class
 at\fhtw\swen3\services\dto\Error.class
 at\fhtw\swen3\persistence\entity\GeoCoordinateEntity$GeoCoordinateEntityBuilder.class
 at\fhtw\swen3\persistence\entity\HopEntity$HopEntityBuilder.class
-at\fhtw\swen3\persistence\entities\TransferwarehouseEntity$TransferwarehouseEntityBuilder.class
 at\fhtw\swen3\mySpringConfig.class
 at\fhtw\swen3\services\mapper\RecipientMapperImpl.class
 at\fhtw\swen3\persistence\repositories\WarehouseNextHopRepository.class
@@ -36,6 +34,7 @@ at\fhtw\swen3\services\dto\HopArrival.class
 at\fhtw\swen3\services\TransferwarehouseService.class
 at\fhtw\swen3\services\HopArrivalService.class
 at\fhtw\swen3\services\impl\RecipientServiceImpl.class
+at\fhtw\swen3\persistence\entity\TransferwarehouseEntity$TransferwarehouseEntityBuilder.class
 at\fhtw\swen3\services\impl\HopServiceImpl.class
 at\fhtw\swen3\persistence\repositories\TruckRepository.class
 at\fhtw\swen3\persistence\entity\HopEntity.class
@@ -70,8 +69,8 @@ at\fhtw\swen3\services\mapper\ParcelMapper.class
 at\fhtw\swen3\OpenApiGeneratorApplication.class
 at\fhtw\swen3\services\dto\Recipient.class
 at\fhtw\swen3\ParcelConttroller.class
+at\fhtw\swen3\persistence\entity\TransferwarehouseEntity.class
 at\fhtw\swen3\services\dto\Hop.class
 at\fhtw\swen3\services\dto\TrackingInformation.class
 at\fhtw\swen3\services\HopService.class
-at\fhtw\swen3\persistence\entities\TransferwarehouseEntity.class
 at\fhtw\swen3\persistence\entity\WarehouseEntity$WarehouseEntityBuilder.class
