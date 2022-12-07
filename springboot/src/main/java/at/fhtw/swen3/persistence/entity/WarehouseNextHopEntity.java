@@ -17,15 +17,17 @@ import javax.validation.constraints.NotNull;
 public class WarehouseNextHopEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name = "id", nullable = false)
     private Long id;
+
     @Column
-    @NotNull
-    @Min(0)
     private Integer traveltimeMins;
-    @OneToOne
-    private HopEntity hop;
+
     @ManyToOne
-    @JoinColumn(name="fk_warehouse")
-    private WarehouseEntity warehouse;
+    @JoinColumn(name = "fk_warehouse")
+    private HopEntity hop;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "warehouse_id")
+    private HopEntity warehouse;
 }
