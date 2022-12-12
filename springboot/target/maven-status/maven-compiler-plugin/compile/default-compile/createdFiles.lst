@@ -41,11 +41,11 @@ at\fhtw\swen3\services\dto\Parcel.class
 at\fhtw\swen3\services\impl\TransferwarehouseServiceImpl.class
 at\fhtw\swen3\services\mapper\ParcelMapper.class
 at\fhtw\swen3\services\dto\Recipient.class
-at\fhtw\swen3\ParcelConttroller.class
 at\fhtw\swen3\persistence\entity\TransferwarehouseEntity.class
 at\fhtw\swen3\services\mapper\HopMapper.class
 at\fhtw\swen3\services\mapper\TruckMapper.class
 at\fhtw\swen3\services\dto\TrackingInformation.class
+at\fhtw\swen3\services\validation\Validator.class
 at\fhtw\swen3\persistence\entity\WarehouseEntity$WarehouseEntityBuilder.class
 at\fhtw\swen3\controller\WarehouseApiController.class
 at\fhtw\swen3\persistence\entity\ParcelEntity.class
@@ -64,7 +64,6 @@ at\fhtw\swen3\services\mapper\TruckMapperImpl.class
 at\fhtw\swen3\services\mapper\WarehouseNextHopsMapper.class
 at\fhtw\swen3\persistence\repositories\WarehouseNextHopsRepository.class
 at\fhtw\swen3\services\dto\Error.class
-at\fhtw\swen3\mySpringConfig.class
 at\fhtw\swen3\services\mapper\RecipientMapperImpl.class
 at\fhtw\swen3\services\dto\TrackingInformation$TrackingInformationBuilder.class
 at\fhtw\swen3\services\impl\TruckServiceImpl.class

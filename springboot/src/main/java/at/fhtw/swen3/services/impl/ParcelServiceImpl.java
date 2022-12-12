@@ -7,9 +7,12 @@ import at.fhtw.swen3.persistence.repositories.RecipientRepository;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.NewParcelInfo;
 import at.fhtw.swen3.services.dto.Parcel;
+import at.fhtw.swen3.services.dto.TrackingInformation;
 import at.fhtw.swen3.services.mapper.ParcelMapper;
+import at.fhtw.swen3.services.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +24,33 @@ public class ParcelServiceImpl implements ParcelService {
 
     private final ParcelRepository parcelRepository;
     private final RecipientRepository recipientRepository;
-
+    private final ParcelMapper parcelMapper;
 
     @Override
-    public NewParcelInfo submitNewParcel(ParcelEntity parcelEntity) {
-        this.recipientRepository.save(parcelEntity.getSender());
-        this.recipientRepository.save(parcelEntity.getRecipient());
-        this.parcelRepository.save(parcelEntity);
+    public String submitNewParcel(Parcel parcel) {
+        // create unique tracking.ID ?
+        // we generate unique tracking id with 10 chars
+        String trackingID = RandomStringUtils.random(10);
 
-        NewParcelInfo newParcelInfo = ParcelMapper.INSTANCE.entityToNewParcelInfoDto(parcelEntity);
+        // first validate the data
+        Validator validator = new Validator();
+
+        validator.validate(parcel);
+
+        NewParcelInfo newParcelInfo = NewParcelInfo.builder().build();
+        TrackingInformation trackingInformation = TrackingInformation.builder().build();
+
+        // set state to PICKUP
+        trackingInformation.setState(TrackingInformation.StateEnum.PICKUP);
+
+
+        ParcelEntity parcelEntity = parcelMapper.from(parcel, newParcelInfo, trackingInformation);
+        // set unique trackingID
+        parcelEntity.setTrackingId(trackingID);
+        parcelEntity = parcelRepository.save(parcelEntity);
         log.info("New parcel submitted: " + parcelEntity.getTrackingId());
 
-        return newParcelInfo;
+        return trackingID;
     }
 
 

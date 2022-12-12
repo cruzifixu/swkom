@@ -8,10 +8,21 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-12T12:35:08+0100",
+    date = "2022-12-12T13:13:51+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class ParcelMapperImpl implements ParcelMapper {
+
+    @Override
+    public ParcelEntity from(Parcel parcel, NewParcelInfo newParcelInfo, TrackingInformation trackingInformation) {
+        if ( parcel == null && newParcelInfo == null && trackingInformation == null ) {
+            return null;
+        }
+
+        ParcelEntity parcelEntity = new ParcelEntity();
+
+        return parcelEntity;
+    }
 
     @Override
     public ParcelEntity dtoToEntity(NewParcelInfo newParcelInfo, TrackingInformation trackingInformation, Parcel parcel) {

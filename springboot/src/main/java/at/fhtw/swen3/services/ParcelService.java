@@ -11,7 +11,8 @@ import java.util.List;
 @Service
 public interface ParcelService {
 
-    NewParcelInfo submitNewParcel(ParcelEntity parcelEntity);
+    // returns trackingID
+    String submitNewParcel(Parcel parcel);
 
     List<Parcel> getAllParcels();
 

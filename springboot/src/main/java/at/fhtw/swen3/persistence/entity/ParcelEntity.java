@@ -58,16 +58,7 @@ public class ParcelEntity {
     @NotNull(message = "List cannot be Null")
     private transient List<@Valid HopArrival> futureHops;
 
-    public void ValidParcel()
-    {
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
-        Set<ConstraintViolation<ParcelEntity>> cV = validator.validate(this);
 
-        for (ConstraintViolation<ParcelEntity> cv : cV) {
-            System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
-        }
-    }
 
     /*
     public int ValidVisitedHops(List<HopArrival> visitedHops)

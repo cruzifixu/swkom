@@ -1,15 +1,25 @@
 package at.fhtw.swen3.configuration;
 
-import at.fhtw.swen3.persistence.repositories.ParcelRepository;
-import at.fhtw.swen3.persistence.repositories.RecipientRepository;
-import at.fhtw.swen3.services.impl.ParcelServiceImpl;
+import at.fhtw.swen3.persistence.entity.ParcelEntity;
+import at.fhtw.swen3.persistence.repositories.*;
+import at.fhtw.swen3.services.*;
+import at.fhtw.swen3.services.dto.NewParcelInfo;
+import at.fhtw.swen3.services.dto.Parcel;
+import at.fhtw.swen3.services.dto.TrackingInformation;
+import at.fhtw.swen3.services.impl.*;
+import at.fhtw.swen3.services.mapper.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
     @Bean
-    public ParcelServiceImpl parcelService(ParcelRepository parcelRepository, RecipientRepository recipientRepository) {
-        return new ParcelServiceImpl(parcelRepository,recipientRepository);
+    public ParcelMapper getParcelMapper() {
+        return new ParcelMapperImpl();
+    }
+
+    @Bean
+    public ParcelServiceImpl parcelService(ParcelRepository parcelRepository, RecipientRepository recipientRepository, ParcelMapper parcelMapper) {
+        return new ParcelServiceImpl(parcelRepository,recipientRepository, parcelMapper);
     }
 }
