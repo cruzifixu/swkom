@@ -14,6 +14,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @RequiredArgsConstructor
@@ -26,10 +29,19 @@ public class ParcelServiceImpl implements ParcelService {
     private final Validator validator;
 
     @Override
+    public String generateTrackingId() {
+        Pattern p = Pattern.compile("^[A-Z\\d]{9}$");
+        Matcher m = p.matcher("");
+        String randomString = m.group();
+        return randomString;
+    }
+
+    @Override
     public String submitNewParcel(Parcel parcel) {
         // create unique tracking.ID ?
         // we generate unique tracking id with 10 chars
-        String trackingID = RandomStringUtils.random(10);
+        // String trackingID = RandomStringUtils.random(10);
+        String trackingID = generateTrackingId();
 
         validator.validate(parcel);
 
@@ -82,6 +94,11 @@ public class ParcelServiceImpl implements ParcelService {
         // Predict or fetch future hops to final destination
         log.info("Future Hops: " + parcelEntity.getFutureHops());
         return parcelEntity.getFutureHops();
+    }
+
+    @Override
+    public void reportHop(String trackingId, String code) {
+
     }
 
 

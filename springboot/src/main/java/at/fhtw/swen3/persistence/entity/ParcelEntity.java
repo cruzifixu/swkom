@@ -21,7 +21,6 @@ import java.util.Set;
 @Entity
 @Table(name = "parcel")
 public class ParcelEntity {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column
     private Long id;
@@ -41,6 +40,7 @@ public class ParcelEntity {
     @NotNull(message = "Recipient cannot be Null")
     private RecipientEntity sender;
 
+    @Id
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
