@@ -25,15 +25,13 @@ public class ParcelServiceImpl implements ParcelService {
     private final ParcelRepository parcelRepository;
     private final RecipientRepository recipientRepository;
     private final ParcelMapper parcelMapper;
+    private final Validator validator;
 
     @Override
     public String submitNewParcel(Parcel parcel) {
         // create unique tracking.ID ?
         // we generate unique tracking id with 10 chars
         String trackingID = RandomStringUtils.random(10);
-
-        // first validate the data
-        Validator validator = new Validator();
 
         validator.validate(parcel);
 
@@ -51,6 +49,17 @@ public class ParcelServiceImpl implements ParcelService {
         log.info("New parcel submitted: " + parcelEntity.getTrackingId());
 
         return trackingID;
+    }
+
+    @Override
+    public void transitionParcel(Parcel parcel) {
+        log.info("Transit new parcel: " + parcel.getTrackingId());
+        // validate the data
+        validator.validate(parcel);
+        // create to entity and then put into Repository
+        ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
+        parcelRepository.save(parcelEntity);
+        log.info("New parcel submitted: " + parcelEntity.getTrackingId());
     }
 
 

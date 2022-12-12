@@ -12,7 +12,8 @@ import java.util.List;
 public interface ParcelService {
 
     // returns trackingID
-    String submitNewParcel(Parcel parcel);
+    String submitNewParcel(Parcel parcel); // Submit a new parcel to the logistics service.
+    void transitionParcel(Parcel parcel); // Transfer an existing parcel into the system from the service of a logistics partner
 
     List<Parcel> getAllParcels();
 
