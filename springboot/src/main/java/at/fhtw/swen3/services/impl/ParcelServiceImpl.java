@@ -5,9 +5,7 @@ import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.persistence.repositories.ParcelRepository;
 import at.fhtw.swen3.persistence.repositories.RecipientRepository;
 import at.fhtw.swen3.services.ParcelService;
-import at.fhtw.swen3.services.dto.NewParcelInfo;
-import at.fhtw.swen3.services.dto.Parcel;
-import at.fhtw.swen3.services.dto.TrackingInformation;
+import at.fhtw.swen3.services.dto.*;
 import at.fhtw.swen3.services.mapper.ParcelMapper;
 import at.fhtw.swen3.services.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +58,30 @@ public class ParcelServiceImpl implements ParcelService {
         ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
         parcelRepository.save(parcelEntity);
         log.info("New parcel submitted: " + parcelEntity.getTrackingId());
+    }
+
+    @Override
+    public void reportDelivery(String trackingId) {
+        // first get the Parcel by trackingID from the Repository
+        ParcelEntity parcelEntity = parcelRepository.getById(Long.valueOf(trackingId));
+        // delete from Repo
+        parcelRepository.deleteById(Long.valueOf(trackingId));
+        // validate the data
+        validator.validate(parcelEntity);
+        // change state to delivered in the DB
+        parcelEntity.setState(TrackingInformation.StateEnum.DELIVERED);
+        // save to repo
+        parcelRepository.save(parcelEntity);
+        log.info("New parcel delivered: " + parcelEntity.getTrackingId());
+    }
+
+    @Override
+    public List<HopArrival> trackParcel(String trackingId) {
+        // first get the Parcel by trackingID from the Repository
+        ParcelEntity parcelEntity = parcelRepository.getById(Long.valueOf(trackingId));
+        // Predict or fetch future hops to final destination
+        log.info("Future Hops: " + parcelEntity.getFutureHops());
+        return parcelEntity.getFutureHops();
     }
 
 
