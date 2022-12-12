@@ -1,35 +1,34 @@
 package at.fhtw.swen3.persistence.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@Data
 @Entity
+@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "warehouse")
 public class WarehouseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name = "id", nullable = true)
     private Long id;
+
     @Column
-    @Pattern(regexp = "\\A(.*?)\\s+(\\d+[a-zA-Z]{0,1}\\s{0,1}[/]{1}\\s{0,1}\\d*[a-zA-Z]{0,1}|\\d+[a-zA-Z-]{0,1}\\d*[a-zA-Z]{0,1})$")
     private Integer level;
-    @Column
-    private String code;
 
     @Column
-    private String hopType;
-
-    @Column
-    private String locationName;
+    @OneToMany
+    @JoinColumn(name = "fk_next_hops")
+    private List<WarehouseNextHopsEntity> nextHops = new ArrayList<>();
 }

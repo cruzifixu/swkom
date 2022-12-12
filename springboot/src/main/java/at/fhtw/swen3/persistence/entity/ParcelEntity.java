@@ -34,7 +34,7 @@ public class ParcelEntity {
     @ManyToOne
     @JoinColumn(name="fk_recipient")
     @NotNull(message = "Recipient cannot be Null")
-    private transient RecipientEntity recipient;
+    private RecipientEntity recipient;
 
     @ManyToOne
     @JoinColumn(name = "fk_sender")
@@ -45,9 +45,16 @@ public class ParcelEntity {
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
     private String value;
+
+    @Column
     private TrackingInformation.StateEnum state;
+
+    @JoinColumn(name = "fk_visited_hops")
     @NotNull(message = "List cannot be Null")
     private transient List<@Valid HopArrival> visitedHops;
+
+
+    @JoinColumn(name = "fk_furture_hops")
     @NotNull(message = "List cannot be Null")
     private transient List<@Valid HopArrival> futureHops;
 

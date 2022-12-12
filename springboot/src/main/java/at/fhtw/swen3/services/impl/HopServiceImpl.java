@@ -6,4 +6,5 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class HopServiceImpl implements HopService{
+    private HopRepository hopRepository;
 }
