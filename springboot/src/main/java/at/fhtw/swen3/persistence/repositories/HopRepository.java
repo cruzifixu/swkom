@@ -4,6 +4,7 @@ import at.fhtw.swen3.persistence.entity.HopEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,6 @@ public interface HopRepository extends JpaRepository<HopEntity, Long> {
 
     @Override
     void deleteById(Long id);
+
+    HopEntity findByCode (String code) throws SQLException;
 }

@@ -11,6 +11,8 @@ import at.fhtw.swen3.services.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,14 @@ import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
 @Slf4j
+@Service
 public class ParcelServiceImpl implements ParcelService {
 
+    @Autowired
     private final ParcelRepository parcelRepository;
-    private final RecipientRepository recipientRepository;
+    @Autowired
     private final ParcelMapper parcelMapper;
+    @Autowired
     private final Validator validator;
 
     @Override

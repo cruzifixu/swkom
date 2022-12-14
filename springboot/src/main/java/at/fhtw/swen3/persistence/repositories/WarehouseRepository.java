@@ -20,4 +20,6 @@ public interface WarehouseRepository extends JpaRepository<WarehouseEntity, Long
 
     @Override
     void deleteById(Long id);
+
+    WarehouseEntity findByCode(String code);
 }

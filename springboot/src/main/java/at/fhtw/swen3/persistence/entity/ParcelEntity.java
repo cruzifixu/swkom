@@ -44,6 +44,7 @@ public class ParcelEntity {
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
     @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
+
     private String value;
 
     @Column

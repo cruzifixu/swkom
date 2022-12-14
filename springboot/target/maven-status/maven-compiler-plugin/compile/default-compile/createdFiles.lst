@@ -38,6 +38,7 @@ at\fhtw\swen3\services\RecipientService.class
 at\fhtw\swen3\persistence\repositories\GeoCoordinateRepository.class
 at\fhtw\swen3\services\dto\WarehouseNextHops.class
 at\fhtw\swen3\services\dto\Parcel.class
+at\fhtw\swen3\persistence\entity\WarehouseEntity$WarehouseEntityBuilderImpl.class
 at\fhtw\swen3\services\impl\TransferwarehouseServiceImpl.class
 at\fhtw\swen3\services\mapper\ParcelMapper.class
 at\fhtw\swen3\services\dto\Recipient.class
@@ -48,6 +49,7 @@ at\fhtw\swen3\services\dto\TrackingInformation.class
 at\fhtw\swen3\services\validation\Validator.class
 at\fhtw\swen3\persistence\entity\WarehouseEntity$WarehouseEntityBuilder.class
 at\fhtw\swen3\controller\WarehouseApiController.class
+at\fhtw\swen3\persistence\entity\HopEntity$HopEntityBuilderImpl.class
 at\fhtw\swen3\persistence\entity\ParcelEntity.class
 at\fhtw\swen3\services\mapper\AbstractMapper.class
 at\fhtw\swen3\services\dto\NewParcelInfo$NewParcelInfoBuilder.class
@@ -92,6 +94,5 @@ at\fhtw\swen3\persistence\repositories\HopRepository.class
 at\fhtw\swen3\services\dto\Warehouse.class
 at\fhtw\swen3\persistence\ConfigurationManager.class
 at\fhtw\swen3\OpenApiGeneratorApplication.class
-at\fhtw\swen3\services\impl\WarehouseServiceImpl$1.class
 at\fhtw\swen3\services\dto\Hop.class
 at\fhtw\swen3\services\HopService.class
