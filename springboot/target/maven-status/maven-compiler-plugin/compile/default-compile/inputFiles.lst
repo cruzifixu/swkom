@@ -12,8 +12,8 @@ C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\service
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\entity\ParcelEntity.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\repositories\HopRepository.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\WarehouseNextHopsService.java
-C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\ConfigurationManager.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\repositories\ParcelRepository.java
+C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\gps\HttpRequest.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\gps\service\GeoEncodingService.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\dto\Parcel.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\controller\rest\ParcelApi.java
@@ -48,7 +48,6 @@ C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\service
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\mapper\GeoCoordinateMapper.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\mapper\HopMapper.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\dto\TrackingInformation.java
-C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\DatabaseConnection.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\impl\WarehouseServiceImpl.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\mapper\WarehouseNextHopsMapper.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\configuration\SpringDocConfiguration.java
@@ -70,5 +69,6 @@ C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persist
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\dto\NewParcelInfo.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\mapper\Mapper.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\dto\Transferwarehouse.java
+C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\model\Address.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\persistence\repositories\WarehouseNextHopsRepository.java
 C:\Users\chiar\IdeaProjects\swkom\springboot\src\main\java\at\fhtw\swen3\services\ParcelService.java

@@ -1,34 +1,35 @@
 package at.fhtw.swen3.persistence.entity;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Data
-@EqualsAndHashCode(callSuper = true)    //for extending HopEntity
 @Entity
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(name = "warehouse")
-public class WarehouseEntity extends HopEntity{
-    /*@Id
+@Table(name = "warehouse")
+public class WarehouseEntity {
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = true)
-    private Long id;*/
-
     @Column
+    private Long id;
+    @Column
+    @Pattern(regexp = "\\A(.*?)\\s+(\\d+[a-zA-Z]{0,1}\\s{0,1}[/]{1}\\s{0,1}\\d*[a-zA-Z]{0,1}|\\d+[a-zA-Z-]{0,1}\\d*[a-zA-Z]{0,1})$")
     private Integer level;
+    @Column
+    private String code;
 
     @Column
-    //@OneToMany
-    @OneToMany(mappedBy = "hop")
-    private List<WarehouseNextHopsEntity> nextHops = new ArrayList<>();
+    private String hopType;
+
+    @Column
+    private String locationName;
 }

@@ -26,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class WarehouseServiceImpl implements WarehouseService {
+
     private WarehouseRepository warehouseRepository;
     private WarehouseNextHopsRepository warehouseNextHopsRepository;
     private Validator validator;
@@ -36,7 +37,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         validator.validate(warehouse);
         WarehouseEntity warehouseEntity = warehouseMapper.dtoToEntity(warehouse);
         WarehouseEntity createdWarehouseEntity = warehouseRepository.save(warehouseEntity);
-        warehouseNextHopsRepository.saveAll(warehouseEntity.getNextHops());
+        //warehouseNextHopsRepository.saveAll(warehouseEntity.getNextHops());
         return warehouseMapper.entityToDto(createdWarehouseEntity);
     }
 

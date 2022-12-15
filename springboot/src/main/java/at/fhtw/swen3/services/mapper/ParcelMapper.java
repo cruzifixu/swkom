@@ -14,13 +14,7 @@ public interface ParcelMapper{
     ParcelMapper INSTANCE = Mappers.getMapper(ParcelMapper.class);
 
     //@Mapping(source = "trackingInformation.state", target = "state")
-    ParcelEntity from(Parcel parcel, NewParcelInfo newParcelInfo, TrackingInformation trackingInformation);
-
-    ParcelEntity dtoToEntity(NewParcelInfo newParcelInfo, TrackingInformation trackingInformation, Parcel parcel);
-
-    TrackingInformation entityToTrackingInformationDto(ParcelEntity parcel);
-    NewParcelInfo entityToNewParcelInfoDto(ParcelEntity parcel);
+    //ParcelEntity from(Parcel parcel, NewParcelInfo newParcelInfo, TrackingInformation trackingInformation);
     Parcel entityToParcelDto(ParcelEntity parcel);
-
     ParcelEntity dtoToEntity(Parcel parcel);
 }

@@ -1,22 +1,20 @@
 package at.fhtw.swen3.services.impl;
 
 
+import at.fhtw.swen3.persistence.entity.HopArrivalEntity;
 import at.fhtw.swen3.persistence.entity.ParcelEntity;
 import at.fhtw.swen3.persistence.repositories.ParcelRepository;
-import at.fhtw.swen3.persistence.repositories.RecipientRepository;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.*;
 import at.fhtw.swen3.services.mapper.ParcelMapper;
 import at.fhtw.swen3.services.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,36 +40,21 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     @Override
-    public String submitNewParcel(Parcel parcel) {
-        // create unique tracking.ID ?
-        // we generate unique tracking id with 10 chars
-        // String trackingID = RandomStringUtils.random(10);
-        String trackingID = generateTrackingId();
-
-        validator.validate(parcel);
-
-        NewParcelInfo newParcelInfo = NewParcelInfo.builder().build();
-        TrackingInformation trackingInformation = TrackingInformation.builder().build();
-
-        // set state to PICKUP
-        trackingInformation.setState(TrackingInformation.StateEnum.PICKUP);
-
-
-        ParcelEntity parcelEntity = parcelMapper.from(parcel, newParcelInfo, trackingInformation);
-        // set unique trackingID
-        parcelEntity.setTrackingId(trackingID);
-        parcelEntity = parcelRepository.save(parcelEntity);
-        log.info("New parcel submitted: " + parcelEntity.getTrackingId());
-
-        return trackingID;
+    public void submitNewParcel(Parcel parcel) {
+        ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
+        // create a new trackingID
+        parcelEntity.setTrackingId("PYJRB4HZ6");
+        parcelRepository.save(parcelEntity);
+        log.info("parcel has been submit");
     }
 
     @Override
-    public void transitionParcel(Parcel parcel) {
+    public void transitionParcel(Parcel parcel, String trackingId) {
         log.info("Transit new parcel: " + parcel.getTrackingId());
         // validate the data
-        validator.validate(parcel);
+        //validator.validate(parcel);
         // create to entity and then put into Repository
+        parcel.setTrackingId(trackingId);
         ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
         parcelRepository.save(parcelEntity);
         log.info("New parcel submitted: " + parcelEntity.getTrackingId());
@@ -93,7 +76,7 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     @Override
-    public List<HopArrival> trackParcel(String trackingId) {
+    public List<HopArrivalEntity> trackParcel(String trackingId) {
         // first get the Parcel by trackingID from the Repository
         ParcelEntity parcelEntity = parcelRepository.getById(Long.valueOf(trackingId));
         // Predict or fetch future hops to final destination
@@ -125,7 +108,7 @@ public class ParcelServiceImpl implements ParcelService {
     public void updateParcel(Long id, ParcelEntity parcelEntity) {
         this.parcelRepository.save(parcelEntity);
 
-        log.info("Parcel with ID " + parcelEntity.getId() + " updated: " + parcelEntity);
+        log.info("Parcel with ID " + parcelEntity.getTrackingId() + " updated: " + parcelEntity);
     }
 
 

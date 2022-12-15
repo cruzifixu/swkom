@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -38,7 +40,8 @@ public class HopEntity {
     @Column
     private String locationName;
 
-    @OneToOne
-    @JoinColumn(name = "fk_location_coordinates")
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Valid
     private GeoCoordinateEntity locationCoordinates;
 }
