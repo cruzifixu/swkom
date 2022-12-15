@@ -20,8 +20,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "recipient")
 public class RecipientEntity {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
 
 

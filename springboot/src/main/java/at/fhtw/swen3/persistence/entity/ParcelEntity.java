@@ -21,46 +21,39 @@ import java.util.Set;
 @Entity
 @Table(name = "parcel")
 public class ParcelEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    @Column
-    private Long id;
 
     @Column
     @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
     @Size(min = 0, message = "A valid weight must at least weigh 0.0")
     private Float weight;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_recipient")
-    @NotNull(message = "Recipient cannot be Null")
-    private transient RecipientEntity recipient;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_sender")
-    @NotNull(message = "Recipient cannot be Null")
+    @NotNull
+    private RecipientEntity recipient;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_sender")
+    @NotNull
     private RecipientEntity sender;
 
+    @Id
+    @Column
+    @Pattern(regexp = "^[A-Z0-9]{9}$")
     @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
-    @Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
+    //@Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
     private String trackingId;
+
     private String value;
+
+    @Column
     private TrackingInformation.StateEnum state;
-    @NotNull(message = "List cannot be Null")
-    private transient List<@Valid HopArrival> visitedHops;
-    @NotNull(message = "List cannot be Null")
-    private transient List<@Valid HopArrival> futureHops;
 
-    public void ValidParcel()
-    {
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
-        Set<ConstraintViolation<ParcelEntity>> cV = validator.validate(this);
+    @OneToMany
+    private List<HopArrivalEntity> visitedHops;
+    @OneToMany
+    private List<HopArrivalEntity> futureHops;
 
-        for (ConstraintViolation<ParcelEntity> cv : cV) {
-            System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
-        }
-    }
+
 
     /*
     public int ValidVisitedHops(List<HopArrival> visitedHops)

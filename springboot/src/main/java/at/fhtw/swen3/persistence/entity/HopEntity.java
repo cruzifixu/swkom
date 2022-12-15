@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -37,16 +40,8 @@ public class HopEntity {
     @Column
     private String locationName;
 
-    @OneToOne
-    @JoinColumn(name = "fk_location_coordinates")
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Valid
     private GeoCoordinateEntity locationCoordinates;
-
-    public HopEntity(String code, String hopType, String description, Integer processingDelayMins, String locationName, GeoCoordinateEntity locationCoordinates) {
-        this.code = code;
-        this.hopType = hopType;
-        this.description = description;
-        this.processingDelayMins = processingDelayMins;
-        this.locationName = locationName;
-        this.locationCoordinates = locationCoordinates;
-    }
 }

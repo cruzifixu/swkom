@@ -1,38 +1,34 @@
 package at.fhtw.swen3.gps.service.impl;
 
+import at.fhtw.swen3.gps.HttpRequest;
 import at.fhtw.swen3.gps.service.GeoEncodingService;
-import at.fhtw.swen3.services.dto.GeoCoordinate;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import at.fhtw.swen3.model.Address;
+import at.fhtw.swen3.persistence.entity.GeoCoordinateEntity;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
+@Slf4j
 public class OpenStreetMapsProxy implements GeoEncodingService {
     @Override
-    public GeoCoordinate encodeAddress(String address) throws IOException, InterruptedException {
-        String baseUrl = "https://nominatim.openstreetmap.org/search?";
-        StringBuilder uriBuilder = new StringBuilder();
-        uriBuilder.append(baseUrl);
-        uriBuilder.append("q=").append(URLEncoder.encode(address, StandardCharsets.UTF_8));
-        uriBuilder.append("&format=json");
-
-        URI uri = URI.create(uriBuilder.toString());
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(uri)
-                .GET()
-                .build();
-        HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        GeoCoordinate[] geolocation = objectMapper.readValue(response.body(), GeoCoordinate[].class);
-        System.out.println(geolocation[0].toString());
-
-        return geolocation[0];
+    public GeoCoordinateEntity encodeAddress(Address a) throws IOException, InterruptedException {
+        GeoCoordinateEntity geoCoordinateEntity = new GeoCoordinateEntity();
+        try {
+            JsonNode obj = Objects.requireNonNull(HttpRequest.getJsonnode(HttpRequest.getResponse(("https://nominatim.openstreetmap.org/?addressdetails=1&q=" + a.getStreet() + " " + a.getPostalCode() + " " + a.getCity() + " " + a.getCountry() + "&format=json&limit=1").replaceAll(" ", "%20")))).get(0);
+            if (obj != null) {
+                geoCoordinateEntity.setLat(Double.valueOf(obj.get("lat").textValue()));
+                geoCoordinateEntity.setLon(Double.valueOf(obj.get("lon").textValue()));
+                log.info("Geo coordinated have been found");
+                return geoCoordinateEntity;
+            } else {
+                log.info("no geo coordinates found");
+                return null;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
