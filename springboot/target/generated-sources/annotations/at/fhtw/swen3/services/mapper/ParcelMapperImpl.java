@@ -1,14 +1,12 @@
 package at.fhtw.swen3.services.mapper;
 
 import at.fhtw.swen3.persistence.entity.ParcelEntity;
-import at.fhtw.swen3.persistence.entity.ParcelEntity.ParcelEntityBuilder;
 import at.fhtw.swen3.services.dto.Parcel;
-import at.fhtw.swen3.services.dto.Parcel.ParcelBuilder;
 import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-14T21:40:39+0100",
+    date = "2022-12-15T13:34:24+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class ParcelMapperImpl implements ParcelMapper {
@@ -19,14 +17,9 @@ public class ParcelMapperImpl implements ParcelMapper {
             return null;
         }
 
-        ParcelBuilder parcel1 = Parcel.builder();
+        Parcel parcel1 = new Parcel();
 
-        parcel1.weight( parcel.getWeight() );
-        parcel1.recipient( parcel.getRecipient() );
-        parcel1.sender( parcel.getSender() );
-        parcel1.trackingId( parcel.getTrackingId() );
-
-        return parcel1.build();
+        return parcel1;
     }
 
     @Override
@@ -35,13 +28,8 @@ public class ParcelMapperImpl implements ParcelMapper {
             return null;
         }
 
-        ParcelEntityBuilder parcelEntity = ParcelEntity.builder();
+        ParcelEntity parcelEntity = new ParcelEntity();
 
-        parcelEntity.weight( parcel.getWeight() );
-        parcelEntity.recipient( parcel.getRecipient() );
-        parcelEntity.sender( parcel.getSender() );
-        parcelEntity.trackingId( parcel.getTrackingId() );
-
-        return parcelEntity.build();
+        return parcelEntity;
     }
 }
