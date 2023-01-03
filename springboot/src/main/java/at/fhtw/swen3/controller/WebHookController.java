@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebHookController {
     private final static Logger logger = LoggerFactory.getLogger(WebHookController.class);
 
-    private WebhookRepository webHookRepository;
+    private final WebhookRepository webHookRepository;
 
     @Autowired
     public WebHookController(WebhookRepository webHookRepository) {
@@ -77,8 +77,8 @@ public class WebHookController {
         }
         return new ResponseEntity<>("Webhook doesn't exist.", HttpStatus.OK);
     }
-
     /*
+
     @RequestMapping(method = RequestMethod.DELETE,value ="/ids/{id}",
             produces=MediaType.TEXT_MARKDOWN_VALUE)
     public ResponseEntity<String> removeWebHookById(@PathVariable Long id){

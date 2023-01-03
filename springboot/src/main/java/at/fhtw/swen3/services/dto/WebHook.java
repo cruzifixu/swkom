@@ -43,6 +43,4 @@ public class WebHook {
         this.type = type;
         this.data = data;
     }
-
-//getters and setters
 }
