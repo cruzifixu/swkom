@@ -1,6 +1,6 @@
 package at.fhtw.swen3.services.impl;
 
-import at.fhtw.swen3.persistence.entity.HopEntity;
+import at.fhtw.swen3.persistence.entities.HopEntity;
 import at.fhtw.swen3.persistence.repositories.HopRepository;
 import at.fhtw.swen3.services.HopService;
 import at.fhtw.swen3.services.mapper.HopMapper;

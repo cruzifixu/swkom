@@ -1,6 +1,6 @@
 package at.fhtw.swen3.services;
 
-import at.fhtw.swen3.persistence.entity.HopEntity;
+import at.fhtw.swen3.persistence.entities.HopEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;

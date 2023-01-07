@@ -1,12 +1,13 @@
 package at.fhtw.swen3.services.mapper;
 
-import at.fhtw.swen3.persistence.entity.ParcelEntity;
+import at.fhtw.swen3.persistence.entities.ParcelEntity;
+import at.fhtw.swen3.services.dto.NewParcelInfo;
 import at.fhtw.swen3.services.dto.Parcel;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-07T15:24:49+0100",
+    date = "2023-01-07T15:52:19+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class ParcelMapperImpl implements ParcelMapper {
@@ -31,5 +32,16 @@ public class ParcelMapperImpl implements ParcelMapper {
         ParcelEntity parcelEntity = new ParcelEntity();
 
         return parcelEntity;
+    }
+
+    @Override
+    public NewParcelInfo toParcelInfoDto(ParcelEntity entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        NewParcelInfo newParcelInfo = new NewParcelInfo();
+
+        return newParcelInfo;
     }
 }

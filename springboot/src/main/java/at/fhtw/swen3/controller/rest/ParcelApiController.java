@@ -5,6 +5,7 @@ import at.fhtw.swen3.controller.rest.ParcelApi;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.NewParcelInfo;
 import at.fhtw.swen3.services.dto.Parcel;
+import at.fhtw.swen3.services.dto.TrackingInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,33 @@ public class ParcelApiController implements ParcelApi {
     // implement the methods from the ParcelAPI
 
     @Override
-    public ResponseEntity<NewParcelInfo> transitionParcel(String trackingId, Parcel parcel) {
-        parcelService.transitionParcel(parcel, trackingId);
+    public ResponseEntity<NewParcelInfo> submitParcel(Parcel parcel){
+        NewParcelInfo newParcel = parcelService.submitNewParcel(parcel);
+        return new ResponseEntity<>(newParcel, HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Void> reportParcelHop(String trackingId, String code) {
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> reportParcelDelivery(String trackingId) {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<TrackingInformation> trackParcel(String trackingId){
+        TrackingInformation trackingInformation = null;
+        // add function body
+        return new ResponseEntity<>(trackingInformation, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<NewParcelInfo> transitionParcel(String trackingId, Parcel parcel) {
+        ResponseEntity<NewParcelInfo> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        //parcelService.transitionParcel(parcel, trackingId);
+        return response;
     }
 
 }

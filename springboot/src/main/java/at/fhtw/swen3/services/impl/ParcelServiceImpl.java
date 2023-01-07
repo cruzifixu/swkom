@@ -1,8 +1,8 @@
 package at.fhtw.swen3.services.impl;
 
 
-import at.fhtw.swen3.persistence.entity.HopArrivalEntity;
-import at.fhtw.swen3.persistence.entity.ParcelEntity;
+import at.fhtw.swen3.persistence.entities.HopArrivalEntity;
+import at.fhtw.swen3.persistence.entities.ParcelEntity;
 import at.fhtw.swen3.persistence.repositories.ParcelRepository;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.*;
@@ -40,12 +40,24 @@ public class ParcelServiceImpl implements ParcelService {
     }
 
     @Override
-    public void submitNewParcel(Parcel parcel) {
+    public NewParcelInfo submitNewParcel(Parcel parcel) {
+
+        validator.validate(parcel);
+
+        String trackingId = null;
+        trackingId = generateTrackingId();
+
+        NewParcelInfo newParcelInfo = NewParcelInfo.builder().trackingId(trackingId).build();
+        TrackingInformation trackingInformation = TrackingInformation.builder().build();
+        trackingInformation.setState(TrackingInformation.StateEnum.PICKUP);
+
         ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
-        // create a new trackingID
-        parcelEntity.setTrackingId("PYJRB4HZ6");
-        parcelRepository.save(parcelEntity);
-        log.info("parcel has been submit");
+        parcelEntity.setTrackingId(newParcelInfo.getTrackingId());
+        parcelEntity.setState(trackingInformation.getState());
+
+        parcelEntity = parcelRepository.save(parcelEntity);
+
+        return parcelMapper.toParcelInfoDto(parcelEntity);
     }
 
     @Override
@@ -53,7 +65,7 @@ public class ParcelServiceImpl implements ParcelService {
         log.info("Transit new parcel: " + parcel.getTrackingId());
         // validate the data
         //validator.validate(parcel);
-        // create to entity and then put into Repository
+        // create to entities and then put into Repository
         parcel.setTrackingId(trackingId);
         ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
         parcelRepository.save(parcelEntity);
