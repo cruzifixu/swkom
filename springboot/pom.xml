@@ -97,6 +97,12 @@
             <artifactId>hibernate-spatial</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.locationtech.jts.io</groupId>
+            <artifactId>jts-io-common</artifactId>
+            <version>1.19.0</version>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- Bean Validation API support -->
         <dependency>
@@ -172,6 +178,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.5.0</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

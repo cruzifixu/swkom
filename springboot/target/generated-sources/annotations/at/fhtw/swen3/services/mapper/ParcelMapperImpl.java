@@ -2,12 +2,11 @@ package at.fhtw.swen3.services.mapper;
 
 import at.fhtw.swen3.persistence.entities.ParcelEntity;
 import at.fhtw.swen3.services.dto.Parcel;
-import at.fhtw.swen3.services.dto.Parcel.ParcelBuilder;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-08T11:59:30+0100",
+    date = "2023-01-08T12:17:13+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class ParcelMapperImpl implements ParcelMapper {
@@ -18,9 +17,9 @@ public class ParcelMapperImpl implements ParcelMapper {
             return null;
         }
 
-        ParcelBuilder parcel1 = Parcel.builder();
+        Parcel parcel1 = new Parcel();
 
-        return parcel1.build();
+        return parcel1;
     }
 
     @Override

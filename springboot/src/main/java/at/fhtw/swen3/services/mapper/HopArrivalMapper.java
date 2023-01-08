@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-
 public interface HopArrivalMapper {
     HopArrivalMapper INSTANCE = Mappers.getMapper(HopArrivalMapper.class);
 
