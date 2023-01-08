@@ -9,15 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface RecipientRepository extends JpaRepository<RecipientEntity, Long> {
-    @Override
-    Optional<RecipientEntity> findById(Long id);
 
-    @Override
-    List<RecipientEntity> findAll();
-
-    @Override
-    <S extends RecipientEntity> S save(S entity);
-
-    @Override
-    void deleteById(Long id);
 }

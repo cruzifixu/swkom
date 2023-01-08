@@ -1,5 +1,6 @@
 package at.fhtw.swen3.persistence.entities;
 
+import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,9 +8,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,31 +18,37 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "recipient")
+@Table(name = "t_recipient")
 public class RecipientEntity {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column
     private Long id;
 
+    @Column
+    @NotNull
+    private String trackingId;
+    @Column
+    @Size(message = "weight must be over 0")
+    @DecimalMin("0.0")
+    private Float weight;
 
+    @NotNull(message = "Recipient cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "fk_recipient")
+    private RecipientEntity recipient;
+    @NotNull(message = "Sender cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "fk_sender")
+    private RecipientEntity sender;
     @Column
-    @NotNull @NotBlank
-    @Pattern(regexp = "\\b([A-Z][a-z]+[- ]?|[A-Z][- '][A-Z]?[a-z]+[- ]?|[a-z]{1,2}[ -'][A-Z][a-z]+)+", message = "Invalid name")
-    private String name;
-    @Column
-    @NotNull @NotBlank
-    @Pattern(regexp = "[a-zA-Z]+\\s\\d+([\\\\|a-z]\\d+[a-z]?)+", message = "Invalid Street name")
-    private String street;
-    @Column
-    @NotNull @NotBlank
-    @Pattern(regexp = "[a|A]-\\d{4}", message = "Invalid Postal Code")
-    private String postalCode;
-    @Column
-    @NotNull @NotBlank
-    @Pattern(regexp = "\\b([A-Z][a-z]+[- ]?|[A-Z][- '][A-Z]?[a-z]+[- ]?|[a-z]{1,2}[ -'][A-Z][a-z]+)+", message = "Invalid City")
-    private String city;
-    @Column
-    private String country;
+    private TrackingInformation.StateEnum state;
+
+    @OneToMany
+    private List<HopArrivalEntity> visitedHops;
+
+    @OneToMany
+    private List<HopArrivalEntity> futureHops;
 
     
     public void ValidRecipient()

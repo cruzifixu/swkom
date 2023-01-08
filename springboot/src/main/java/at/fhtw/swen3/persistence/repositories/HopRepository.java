@@ -10,17 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface HopRepository extends JpaRepository<HopEntity, Long> {
-    @Override
-    Optional<HopEntity> findById(Long id);
 
-    @Override
-    List<HopEntity> findAll();
-
-    @Override
-    <S extends HopEntity> S save(S entity);
-
-    @Override
-    void deleteById(Long id);
-
-    HopEntity findByCode (String code) throws SQLException;
 }

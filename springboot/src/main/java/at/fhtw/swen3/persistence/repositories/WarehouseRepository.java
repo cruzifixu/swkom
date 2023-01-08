@@ -9,17 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface WarehouseRepository extends JpaRepository<WarehouseEntity, Long> {
-    @Override
-    Optional<WarehouseEntity> findById(Long id);
 
     @Override
     List<WarehouseEntity> findAll();
 
-    @Override
-    <S extends WarehouseEntity> S save(S entity);
-
-    @Override
-    void deleteById(Long id);
+    WarehouseEntity findByLevel(int level);
 
     WarehouseEntity findByCode(String code);
 }

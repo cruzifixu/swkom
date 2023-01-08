@@ -1,33 +1,26 @@
 package at.fhtw.swen3.persistence.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
-@Data
-@Entity
-@Builder
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Getter
+@Setter
 @NoArgsConstructor
-@Table(name = "warehouse")
-public class WarehouseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Entity
+public class WarehouseEntity extends HopEntity{
     @Column
-    private Long id;
-    @Column
-    @Pattern(regexp = "\\A(.*?)\\s+(\\d+[a-zA-Z]{0,1}\\s{0,1}[/]{1}\\s{0,1}\\d*[a-zA-Z]{0,1}|\\d+[a-zA-Z-]{0,1}\\d*[a-zA-Z]{0,1})$")
+    @Min(0)
     private Integer level;
-    @Column
-    private String code;
 
-    @Column
-    private String hopType;
-
-    @Column
-    private String locationName;
+    @JoinColumn(name="fk_nextHops")
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<WarehouseNextHopsEntity> nextHops;
 }

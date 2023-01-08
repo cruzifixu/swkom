@@ -4,10 +4,7 @@ import at.fhtw.swen3.services.dto.TrackingInformation;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Builder
@@ -16,40 +13,38 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "parcel")
+@Table(name = "t_parcel")
 public class ParcelEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column
-    @NotNull(message = "weight cannot be Null") @NotBlank(message = "weight cannot be blank")
-    @Size(min = 0, message = "A valid weight must at least weigh 0.0")
+    private Long id;
+
+    @Column
+    @NotNull
+    private String trackingId;
+    @Column
+    @Size(message = "weight must be over 0")
+    @DecimalMin("0.0")
     private Float weight;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_recipient")
-    @NotNull
+    @NotNull(message = "Recipient cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "fk_recipient")
     private RecipientEntity recipient;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_sender")
-    @NotNull
+    @NotNull(message = "Sender cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "fk_sender")
     private RecipientEntity sender;
-
-    @Id
-    @Column
-    @Pattern(regexp = "^[A-Z0-9]{9}$")
-    @NotNull(message = "Tracking ID cannot be Null") @NotBlank(message = "Tracking ID cannot be blank")
-    //@Pattern(regexp = "^[A-Z\\d]{9}$", message = "Invalid tracking ID")
-    private String trackingId;
-
-    private String value;
-
     @Column
     private TrackingInformation.StateEnum state;
 
     @OneToMany
     private List<HopArrivalEntity> visitedHops;
+
     @OneToMany
     private List<HopArrivalEntity> futureHops;
-
 
 
     /*

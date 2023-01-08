@@ -4,13 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import org.locationtech.jts.geom.Geometry;
+
+
 @Entity
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "geo_coordinate")
+@Table(name = "t_geocoordinate")
 public class GeoCoordinateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,4 +23,6 @@ public class GeoCoordinateEntity {
     private Double lat;
     @Column
     private Double lon;
+    @Column
+    private Geometry point;
 }

@@ -1,26 +1,24 @@
 package at.fhtw.swen3.persistence.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import at.fhtw.swen3.services.dto.Hop;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.locationtech.jts.geom.Geometry;
 
 import javax.persistence.*;
 
-@Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Getter
+@Setter
+@SuperBuilder
 @Entity
-@Table(name = "truck")
-public class TruckEntity {
+public class TruckEntity extends HopEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private Long id;
-    @Column
-    private String regionGeoJson;
+    private Geometry regionGeoJson;
+
     @Column
     private String numberPlate;
 }

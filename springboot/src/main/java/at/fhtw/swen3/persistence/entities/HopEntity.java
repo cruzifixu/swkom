@@ -1,8 +1,6 @@
 package at.fhtw.swen3.persistence.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -10,12 +8,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Data
-@SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "hop")
+@SuperBuilder
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@AllArgsConstructor
+@NoArgsConstructor
 public class HopEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,8 +37,7 @@ public class HopEntity {
     @Column
     private String locationName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @NotNull
-    @Valid
+    @JoinColumn(name="fk_Coordinates")
+    @OneToOne (cascade = CascadeType.REMOVE)
     private GeoCoordinateEntity locationCoordinates;
 }

@@ -9,16 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface HopArrivalRepository extends JpaRepository<HopArrivalEntity, Long> {
-    @Override
-    Optional<HopArrivalEntity> findById(Long id);
-
-    @Override
-    List<HopArrivalEntity> findAll();
-
-    @Override
-    <S extends HopArrivalEntity> S save(S entity);
-
-    @Override
-    void deleteById(Long id);
 
 }

@@ -10,17 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface WarehouseNextHopsRepository extends JpaRepository<WarehouseNextHopsEntity, Long> {
-    @Override
-    Optional<WarehouseNextHopsEntity> findById(@NotNull Long id);
 
-    @NotNull
-    @Override
-    List<WarehouseNextHopsEntity> findAll();
-
-    @NotNull
-    @Override
-    <S extends WarehouseNextHopsEntity> S save(@NotNull S entity);
-
-    @Override
-    void deleteById(@NotNull Long id);
 }

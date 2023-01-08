@@ -1,31 +1,27 @@
 package at.fhtw.swen3.persistence.entities;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "warehouse_next_hop")
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "warehouse_next_hops")
 public class WarehouseNextHopsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+    @Column
     private Long id;
 
     @Column
+    @NotNull
     private Integer traveltimeMins;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_warehouse")
+    @OneToOne (cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "hop_id")
     private HopEntity hop;
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
-    @JoinColumn(name = "warehouse_id")
-    private HopEntity warehouse;
 }
