@@ -1,23 +1,27 @@
 package at.fhtw.swen3.services.impl;
 
 
-import at.fhtw.swen3.persistence.entities.HopArrivalEntity;
-import at.fhtw.swen3.persistence.entities.ParcelEntity;
-import at.fhtw.swen3.persistence.repositories.ParcelRepository;
+import at.fhtw.swen3.gps.service.impl.OpenStreetMapsProxy;
+import at.fhtw.swen3.model.Address;
+import at.fhtw.swen3.persistence.entities.*;
+import at.fhtw.swen3.persistence.repositories.*;
 import at.fhtw.swen3.services.ParcelService;
 import at.fhtw.swen3.services.dto.*;
+import at.fhtw.swen3.services.mapper.HopArrivalMapperImpl;
 import at.fhtw.swen3.services.mapper.ParcelMapper;
+import at.fhtw.swen3.services.mapper.ParcelMapperImpl;
 import at.fhtw.swen3.services.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -26,108 +30,211 @@ public class ParcelServiceImpl implements ParcelService {
 
     @Autowired
     private final ParcelRepository parcelRepository;
+
     @Autowired
-    private final ParcelMapper parcelMapper;
+    private final RecipientRepository recipientRepository;
+
+    private final ParcelMapperImpl parcelMapper = new ParcelMapperImpl();
     @Autowired
-    private final Validator validator;
+    private final GeoCoordinateRepository geoCoordinateRepository;
+    @Autowired
+    private final WarehouseRepository warehouseRepository;
+    @Autowired
+    private final TruckRepository truckRepository;
+    @Autowired
+    private final HopArrivalRepository hopArrivalRepository;
+    @Autowired
+    private final TransferwarehouseRepository transferwarehouseRepository;
+
 
     @Override
-    public String generateTrackingId() {
-        Pattern p = Pattern.compile("^[A-Z\\d]{9}$");
-        Matcher m = p.matcher("");
-        String randomString = m.group();
-        return randomString;
-    }
+    public String submitNewParcel(Parcel parcel, String id) {
 
-    @Override
-    public NewParcelInfo submitNewParcel(Parcel parcel) {
+        UUID uuid = UUID.randomUUID();
 
-        validator.validate(parcel);
+        OpenStreetMapsProxy mapsEncodingProxy = new OpenStreetMapsProxy();
 
-        String trackingId = null;
-        trackingId = generateTrackingId();
-
-        NewParcelInfo newParcelInfo = NewParcelInfo.builder().trackingId(trackingId).build();
-        TrackingInformation trackingInformation = TrackingInformation.builder().build();
-        trackingInformation.setState(TrackingInformation.StateEnum.PICKUP);
+        if (id.equals("")) id = UUID.randomUUID().toString().replace("-", "").toUpperCase().substring(0, 9);
 
         ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
-        parcelEntity.setTrackingId(newParcelInfo.getTrackingId());
-        parcelEntity.setState(trackingInformation.getState());
 
-        parcelEntity = parcelRepository.save(parcelEntity);
+        parcelEntity.setTrackingId(id);
+        parcelEntity.setState(TrackingInformation.StateEnum.PICKUP);
+        GeoCoordinateEntity geoCoordinateEntityR = mapsEncodingProxy.encodeAddress(new Address(parcelEntity.getRecipient().getStreet(), parcelEntity.getRecipient().getPostalCode(), parcelEntity.getRecipient().getCity(), parcelEntity.getRecipient().getCountry()));
+        GeoCoordinateEntity geoCoordinateEntityS = mapsEncodingProxy.encodeAddress(new Address(parcelEntity.getSender().getStreet(), parcelEntity.getSender().getPostalCode(), parcelEntity.getSender().getCity(), parcelEntity.getSender().getCountry()));
 
-        return parcelMapper.toParcelInfoDto(parcelEntity);
-    }
+        parcelEntity.getRecipient().setLocationCoordinates(geoCoordinateEntityR);
+        parcelEntity.getSender().setLocationCoordinates(geoCoordinateEntityS);
 
-    @Override
-    public void transitionParcel(Parcel parcel, String trackingId) {
-        log.info("Transit new parcel: " + parcel.getTrackingId());
-        // validate the data
-        //validator.validate(parcel);
-        // create to entities and then put into Repository
-        parcel.setTrackingId(trackingId);
-        ParcelEntity parcelEntity = parcelMapper.dtoToEntity(parcel);
-        parcelRepository.save(parcelEntity);
-        log.info("New parcel submitted: " + parcelEntity.getTrackingId());
-    }
-
-    @Override
-    public void reportDelivery(String trackingId) {
-        // first get the Parcel by trackingID from the Repository
-        ParcelEntity parcelEntity = parcelRepository.getById(Long.valueOf(trackingId));
-        // delete from Repo
-        parcelRepository.deleteById(Long.valueOf(trackingId));
-        // validate the data
-        validator.validate(parcelEntity);
-        // change state to delivered in the DB
-        parcelEntity.setState(TrackingInformation.StateEnum.DELIVERED);
-        // save to repo
-        parcelRepository.save(parcelEntity);
-        log.info("New parcel delivered: " + parcelEntity.getTrackingId());
-    }
-
-    @Override
-    public List<HopArrivalEntity> trackParcel(String trackingId) {
-        // first get the Parcel by trackingID from the Repository
-        ParcelEntity parcelEntity = parcelRepository.getById(Long.valueOf(trackingId));
-        // Predict or fetch future hops to final destination
-        log.info("Future Hops: " + parcelEntity.getFutureHops());
-        return parcelEntity.getFutureHops();
-    }
-
-    @Override
-    public void reportHop(String trackingId, String code) {
-
-    }
-
-
-    @Override
-    public List<Parcel> getAllParcels() {
-        List<Parcel> parcelDtos = new ArrayList<>();
-        List<ParcelEntity> parcelEntities = this.parcelRepository.findAll();
-
-        for(ParcelEntity parcelEntity : parcelEntities) {
-            parcelDtos.add(ParcelMapper.INSTANCE.entityToParcelDto(parcelEntity));
+        geoCoordinateRepository.save(geoCoordinateEntityR);
+        geoCoordinateRepository.save(geoCoordinateEntityS);
+        Long recp_id = recipientRepository.save(parcelEntity.getRecipient()).getId();
+        Long send_id = recipientRepository.save(parcelEntity.getSender()).getId();
+        List<TruckEntity> truck = truckRepository.getClosestHop(recp_id);
+        List<TransferwarehouseEntity> transferwarehouseEntity = transferwarehouseRepository.getClosestHop(recp_id);//TODO: check whats closer
+        List<TruckEntity> s_truck = truckRepository.getClosestHop(send_id);
+        List<TransferwarehouseEntity> s_transferwarehouseEntity = transferwarehouseRepository.getClosestHop(send_id);
+        HopEntity closestR = new HopEntity();
+        HopEntity closestS = new HopEntity();
+        if(truck.size()>0 && transferwarehouseEntity.size()>0) {
+            closestR = closerHop(truck.get(0),transferwarehouseEntity.get(0),recp_id);
+        }else if(s_truck.size()>0 && s_transferwarehouseEntity.size()>0) {
+            closestS = closerHop(s_truck.get(0),s_transferwarehouseEntity.get(0),send_id);
         }
-
-        log.info("Get all parcels");
-        return parcelDtos;
+        if(transferwarehouseEntity.isEmpty()){
+            closestR = truck.get(0);
+        }
+        if(s_transferwarehouseEntity.isEmpty()){
+            closestS = s_truck.get(0);
+        }
+        List<HopEntity> routehops = calculateRoute(closestR, closestS);
+        parcelEntity.setFutureHops(createFutureHops(routehops));
+        hopArrivalRepository.saveAll(parcelEntity.getFutureHops());
+        parcelRepository.save(parcelEntity);
+        log.info("parcel has been submit");
+        return parcelEntity.getTrackingId();
     }
-
 
     @Override
-    public void updateParcel(Long id, ParcelEntity parcelEntity) {
-        this.parcelRepository.save(parcelEntity);
+    public TrackingInformation getParcel(String tracking_id) {
+        HopArrivalMapperImpl hopArrivalMapper = new HopArrivalMapperImpl();
+        ParcelEntity parcelEntity = parcelRepository.findByTrackingId(tracking_id);
+        TrackingInformation trackingInformation = new TrackingInformation();
 
-        log.info("Parcel with ID " + parcelEntity.getTrackingId() + " updated: " + parcelEntity);
+        List<HopArrival> hopArrivals = new ArrayList<HopArrival>();
+        List<HopArrival> visited = new ArrayList<HopArrival>();
+        for (HopArrivalEntity hopArrivalEntity : parcelEntity.getFutureHops()){
+            hopArrivals.add(hopArrivalMapper.entityToDto(hopArrivalEntity));
+        }
+        for (HopArrivalEntity hopArrivalEntity : parcelEntity.getVisitedHops()){
+            visited.add(hopArrivalMapper.entityToDto(hopArrivalEntity));
+        }
+        trackingInformation.setState(parcelEntity.getState());
+        trackingInformation.setFutureHops(hopArrivals);
+        trackingInformation.setVisitedHops(visited);
+
+        return trackingInformation;
     }
-
 
     @Override
-    public void deleteParcel(Long id) {
-        this.parcelRepository.deleteById(id);
+    public void reportParcel(String tracking, String code) {
+        ParcelEntity parcelEntity = parcelRepository.findByTrackingId(tracking);
 
-        log.info("Parcel with ID " + id + " deleted");
+        for (HopArrivalEntity hopArrival : parcelEntity.getFutureHops()){
+            if(hopArrival.getCode().equals(code)){
+                parcelEntity.getFutureHops().remove(hopArrival);
+                parcelEntity.getVisitedHops().add(hopArrival);
+                switch (hopArrival.getDescription().split(" ")[0]) {
+                    // set language to 14 for switch expressions
+                    case "Warehouse" -> parcelEntity.setState(TrackingInformation.StateEnum.INTRANSPORT);
+                    case "Truck" -> parcelEntity.setState(TrackingInformation.StateEnum.INTRUCKDELIVERY);
+                    case "Transferwarehouse" ->// TODO: partner url call
+                            parcelEntity.setState(TrackingInformation.StateEnum.TRANSFERRED);
+                }
+                break;
+            }
+        }
+        parcelRepository.save(parcelEntity);
     }
+
+    @Override
+    public void reportDelivery(String tracking) {
+        ParcelEntity parcelEntity = parcelRepository.findByTrackingId(tracking);
+
+        parcelEntity.setState(TrackingInformation.StateEnum.DELIVERED);
+        parcelRepository.save(parcelEntity);
+    }
+
+    private HopEntity closerHop(HopEntity hopA,HopEntity hopB, long id){
+        Double distRTruck = truckRepository.getDistance(hopA.getLocationCoordinates().getId(), id);
+        Double distRTrans = transferwarehouseRepository.getDistance(hopB.getLocationCoordinates().getId(), id);
+        if (distRTruck < distRTrans) {
+            return hopA;
+        } else {
+            return hopB;
+        }
+    }
+
+    private List<HopArrivalEntity> createFutureHops(List<HopEntity> hops){
+
+        List<HopArrivalEntity> futureHops= new ArrayList<>();
+        int process = 0;
+        for (HopEntity hop :  hops){
+            HopArrivalEntity hopArrivalEntity = new HopArrivalEntity();
+            hopArrivalEntity.setCode(hop.getCode());
+            hopArrivalEntity.setDescription(hop.getDescription());
+            process+=hop.getProcessingDelayMins();
+            hopArrivalEntity.setDateTime(OffsetDateTime.now().plusMinutes(process));
+            futureHops.add(hopArrivalEntity);
+        }
+        return futureHops;
+    }
+
+    private List<HopEntity> calculateRoute(HopEntity aParent, HopEntity bParent) {
+
+        WarehouseEntity warehouseEntity = warehouseRepository.findByLevel(0);
+
+        WarehouseNextHopsEntity aParentNextHop = getParentNextHops(aParent, warehouseEntity);
+        WarehouseNextHopsEntity bParentNextHop = getParentNextHops(bParent, warehouseEntity);
+        WarehouseEntity aParentWarehouse = getParentWarehouse(aParentNextHop, warehouseEntity);
+        WarehouseEntity bParentWarehouse = getParentWarehouse(bParentNextHop, warehouseEntity);
+        if (aParentWarehouse == bParentWarehouse) {
+            List<HopEntity> commonParent = new ArrayList<>();
+            commonParent.add(0,aParent);
+            commonParent.add(aParentWarehouse);
+            commonParent.add(bParent);
+            return commonParent;
+        } else {
+            List<HopEntity> route = calculateRoute(aParentWarehouse, bParentWarehouse);
+            route.add(0, aParent);
+            route.add(bParent);
+            return route;
+        }
+    }
+
+    private WarehouseNextHopsEntity getParentNextHops(HopEntity parent, WarehouseEntity warehouseEntity) {
+
+
+        WarehouseNextHopsEntity nextHops = null;
+        for (WarehouseNextHopsEntity nextHop : warehouseEntity.getNextHops()) {
+            if (nextHop.getHop().getCode().equals(parent.getCode())) {
+                return nextHop;
+            } else if (nextHop.getHop().getHopType().equals("warehouse")) {
+                nextHops = getParentNextHops(parent, (WarehouseEntity) nextHop.getHop());
+                if (nextHops != null) {
+                    return nextHops;
+                }
+            }
+        }
+        return null;
+
+    }
+
+    private WarehouseEntity getParentWarehouse(WarehouseNextHopsEntity warehouseNextHopsEntity, WarehouseEntity warehouseEntity) {
+
+        WarehouseEntity entity = null;
+
+        for (WarehouseNextHopsEntity nextHop : warehouseEntity.getNextHops()) {
+            if (nextHop.getHop().getHopType().equals("warehouse")) {
+                if(nextHop.equals(warehouseNextHopsEntity)){
+                    return warehouseEntity;
+                }else {
+                    for (WarehouseNextHopsEntity hop : ((WarehouseEntity) nextHop.getHop()).getNextHops()) {
+                        if (hop.equals(warehouseNextHopsEntity)) {
+                            return (WarehouseEntity) nextHop.getHop();
+                        }
+                    }
+                }
+                entity = getParentWarehouse(warehouseNextHopsEntity, ((WarehouseEntity) nextHop.getHop()));
+                if (entity != null) {
+                    return entity;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+
 }

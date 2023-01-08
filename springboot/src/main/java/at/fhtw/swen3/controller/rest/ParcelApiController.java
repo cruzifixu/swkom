@@ -38,32 +38,33 @@ public class ParcelApiController implements ParcelApi {
 
     @Override
     public ResponseEntity<NewParcelInfo> submitParcel(Parcel parcel){
-        NewParcelInfo newParcel = parcelService.submitNewParcel(parcel);
-        return new ResponseEntity<>(newParcel, HttpStatus.CREATED);
+        NewParcelInfo newParcelInfo = new NewParcelInfo();
+        newParcelInfo.setTrackingId(parcelService.submitNewParcel(parcel, ""));
+        return new ResponseEntity<NewParcelInfo>(newParcelInfo, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Void> reportParcelHop(String trackingId, String code) {
+        parcelService.reportParcel(trackingId, code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Void> reportParcelDelivery(String trackingId) {
+        parcelService.reportDelivery(trackingId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<TrackingInformation> trackParcel(String trackingId){
-        TrackingInformation trackingInformation = null;
-        // add function body
-        return new ResponseEntity<>(trackingInformation, HttpStatus.OK);
+        return new ResponseEntity<TrackingInformation>(parcelService.getParcel(trackingId),HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<NewParcelInfo> transitionParcel(String trackingId, Parcel parcel) {
-        ResponseEntity<NewParcelInfo> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        //parcelService.transitionParcel(parcel, trackingId);
-        return response;
+        NewParcelInfo newParcelInfo = new NewParcelInfo();
+        newParcelInfo.setTrackingId(parcelService.submitNewParcel(parcel, trackingId));
+        return new ResponseEntity<NewParcelInfo>(newParcelInfo, HttpStatus.OK);
     }
 
 }

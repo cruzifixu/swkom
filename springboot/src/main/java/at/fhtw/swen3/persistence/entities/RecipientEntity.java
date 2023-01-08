@@ -25,40 +25,22 @@ public class RecipientEntity {
     @Column
     private Long id;
 
+
+    @Column @Pattern(regexp = "^[A-Z]+[a-zA-Z',.\\s-]")@NotNull(message = "Name cannot be null")
+    private String name;
+
+    @Column @Pattern(regexp = "\\A(.*?)\\s+(\\d+[a-zA-Z]{0,1}\\s{0,1}[/]{1}\\s{0,1}\\d*[a-zA-Z]{0,1}|\\d+[a-zA-Z-]{0,1}\\d*[a-zA-Z]{0,1})$")@NotNull(message = "Name cannot be null")
+    private String street;
+
+    @Column @Pattern(regexp = "^A-[0-9]{4}$") @NotNull(message = "Name cannot be null")
+    private String postalCode;
+
+    @Column @Pattern(regexp = "^[A-Z]+[a-zA-Z',.\\s-]")@NotNull(message = "Name cannot be null")
+    private String city;
+
     @Column
-    @NotNull
-    private String trackingId;
-    @Column
-    @Size(message = "weight must be over 0")
-    @DecimalMin("0.0")
-    private Float weight;
+    private String country;
 
-    @NotNull(message = "Recipient cannot be null")
-    @ManyToOne
-    @JoinColumn(name = "fk_recipient")
-    private RecipientEntity recipient;
-    @NotNull(message = "Sender cannot be null")
-    @ManyToOne
-    @JoinColumn(name = "fk_sender")
-    private RecipientEntity sender;
-    @Column
-    private TrackingInformation.StateEnum state;
-
-    @OneToMany
-    private List<HopArrivalEntity> visitedHops;
-
-    @OneToMany
-    private List<HopArrivalEntity> futureHops;
-
-    
-    public void ValidRecipient()
-    {
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
-        Set<ConstraintViolation<RecipientEntity>> cV = validator.validate(this);
-
-        for (ConstraintViolation<RecipientEntity> cv : cV) {
-            System.out.println(String.format("Error here! property: [%s], value: [%s], message: [%s]", cv.getPropertyPath(), cv.getInvalidValue(), cv.getMessage()));
-        }
-    }
+    @OneToOne (cascade = CascadeType.REMOVE)
+    private GeoCoordinateEntity locationCoordinates;
 }

@@ -15,6 +15,4 @@ public interface ParcelMapper{
     //ParcelEntity from(Parcel parcel, NewParcelInfo newParcelInfo, TrackingInformation trackingInformation);
     Parcel entityToParcelDto(ParcelEntity parcel);
     ParcelEntity dtoToEntity(Parcel parcel);
-
-    NewParcelInfo toParcelInfoDto(ParcelEntity entity);
 }

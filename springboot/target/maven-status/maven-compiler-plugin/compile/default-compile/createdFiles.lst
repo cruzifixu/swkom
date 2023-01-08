@@ -1,8 +1,10 @@
 at\fhtw\swen3\controller\rest\WarehouseApi.class
+at\fhtw\swen3\persistence\repositories\WebhookRepository.class
 at\fhtw\swen3\persistence\entities\HopEntity$1.class
 at\fhtw\swen3\services\dto\GeoCoordinate.class
 at\fhtw\swen3\controller\HomeController.class
 at\fhtw\swen3\services\impl\WarehouseServiceImpl.class
+at\fhtw\swen3\persistence\entities\WarehouseEntity$1.class
 at\fhtw\swen3\persistence\repositories\ParcelRepository.class
 at\fhtw\swen3\persistence\repositories\HopArrivalRepository.class
 at\fhtw\swen3\controller\rest\WarehouseApiController.class
@@ -16,6 +18,7 @@ at\fhtw\swen3\services\mapper\GeoCoordinateMapper.class
 at\fhtw\swen3\controller\rest\ApiUtil.class
 at\fhtw\swen3\persistence\entities\ErrorEntity.class
 at\fhtw\swen3\persistence\entities\ParcelEntity$ParcelEntityBuilder.class
+at\fhtw\swen3\persistence\entities\WarehouseEntity$WarehouseEntityBuilderImpl.class
 at\fhtw\swen3\persistence\entities\TruckEntity.class
 at\fhtw\swen3\services\mapper\ParcelMapperImpl.class
 at\fhtw\swen3\services\dto\Parcel$ParcelBuilder.class
@@ -25,6 +28,8 @@ at\fhtw\swen3\services\TransferwarehouseService.class
 at\fhtw\swen3\persistence\repositories\TruckRepository.class
 at\fhtw\swen3\persistence\entities\HopArrivalEntity$HopArrivalEntityBuilder.class
 at\fhtw\swen3\gps\service\GeoEncodingService.class
+at\fhtw\swen3\persistence\entities\TransferwarehouseEntity$1.class
+at\fhtw\swen3\persistence\entities\TransferwarehouseEntity$TransferwarehouseEntityBuilderImpl.class
 at\fhtw\swen3\services\dto\Transferwarehouse.class
 at\fhtw\swen3\persistence\entities\HopArrivalEntity.class
 at\fhtw\swen3\services\mapper\RecipientMapper.class
@@ -33,6 +38,7 @@ at\fhtw\swen3\services\TruckService.class
 at\fhtw\swen3\services\mapper\ErrorMapperImpl.class
 at\fhtw\swen3\services\impl\WarehouseNextHopsServiceImpl.class
 at\fhtw\swen3\services\WarehouseNextHopsService.class
+at\fhtw\swen3\persistence\repositories\ErrorRepository.class
 at\fhtw\swen3\services\GeoCoordinateService.class
 at\fhtw\swen3\services\RecipientService.class
 at\fhtw\swen3\persistence\repositories\GeoCoordinateRepository.class
@@ -46,6 +52,7 @@ at\fhtw\swen3\services\mapper\TruckMapper.class
 at\fhtw\swen3\services\dto\TrackingInformation.class
 at\fhtw\swen3\services\validation\Validator.class
 at\fhtw\swen3\persistence\entities\TransferwarehouseEntity.class
+at\fhtw\swen3\persistence\entities\TruckEntity$1.class
 at\fhtw\swen3\gps\HttpRequest.class
 at\fhtw\swen3\persistence\entities\GeoCoordinateEntity$GeoCoordinateEntityBuilder.class
 at\fhtw\swen3\services\mapper\ErrorMapper.class
@@ -62,6 +69,7 @@ at\fhtw\swen3\services\impl\ParcelServiceImpl.class
 at\fhtw\swen3\persistence\repositories\TransferwarehouseRepository.class
 at\fhtw\swen3\services\mapper\GeoCoordinateMapperImpl.class
 at\fhtw\swen3\services\mapper\HopArrivalMapper.class
+at\fhtw\swen3\services\dto\Webhook.class
 at\fhtw\swen3\services\mapper\TruckMapperImpl.class
 at\fhtw\swen3\services\mapper\WarehouseNextHopsMapper.class
 at\fhtw\swen3\persistence\repositories\WarehouseNextHopsRepository.class
@@ -77,6 +85,7 @@ at\fhtw\swen3\services\HopArrivalService.class
 at\fhtw\swen3\services\impl\RecipientServiceImpl.class
 at\fhtw\swen3\services\impl\HopServiceImpl.class
 at\fhtw\swen3\model\Address$AddressBuilder.class
+at\fhtw\swen3\persistence\entities\TruckEntity$TruckEntityBuilderImpl.class
 at\fhtw\swen3\RFC3339DateFormat.class
 at\fhtw\swen3\persistence\repositories\RecipientRepository.class
 at\fhtw\swen3\services\dto\NewParcelInfo.class
@@ -100,4 +109,5 @@ at\fhtw\swen3\controller\rest\ParcelApiController.class
 at\fhtw\swen3\persistence\entities\HopEntity.class
 at\fhtw\swen3\persistence\entities\RecipientEntity.class
 at\fhtw\swen3\services\dto\Hop.class
+at\fhtw\swen3\controller\rest\WebHookController.class
 at\fhtw\swen3\services\HopService.class
