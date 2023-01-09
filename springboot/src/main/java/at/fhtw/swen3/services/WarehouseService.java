@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface WarehouseService {
-    Warehouse importWarehouses(Warehouse warehouse) throws Exception;
+    void importWarehouses(Warehouse warehouse) throws Exception;
     List<Warehouse> exportWarehouses();
-    Hop getWarehouse(String code) throws SQLException;
+    Warehouse getWarehouse() throws SQLException;
 }
