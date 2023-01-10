@@ -7,8 +7,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface GeoCoordinateMapper {
-    GeoCoordinateMapper INSTANCE = Mappers.getMapper(GeoCoordinateMapper.class);
-
     GeoCoordinate entityToDto(GeoCoordinateEntity geoCoordinateEntity);
     GeoCoordinateEntity dtoToEntity(GeoCoordinate geoCoordinate);
 }

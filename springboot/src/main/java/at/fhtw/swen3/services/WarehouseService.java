@@ -10,6 +10,6 @@ import java.util.List;
 @Service
 public interface WarehouseService {
     void importWarehouses(Warehouse warehouse) throws Exception;
-    List<Warehouse> exportWarehouses();
-    Warehouse getWarehouse() throws SQLException;
+    Warehouse exportWarehouses();
+    Warehouse getWarehouse(String code) throws SQLException;
 }

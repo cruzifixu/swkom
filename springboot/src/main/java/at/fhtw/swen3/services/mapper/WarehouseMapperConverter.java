@@ -42,7 +42,6 @@ public class WarehouseMapperConverter {
             switch (hop.getHop().getHopType()) {
                 case "warehouse":
                     List<WarehouseNextHops> nextHops = ((Warehouse) hop.getHop()).getNextHops();
-                    //warehouseNextHopsEntities.add(new WarehouseNextHopsEntity(null, hop.getTraveltimeMins(), warehouseMapper.dtoToEntity((Warehouse) hop.getHop())));
                     Warehouse warehouse = (Warehouse) hop.getHop();
                     WarehouseEntity warehouseEntity = convert(warehouse);
                     warehouseNextHopsEntities.add(new WarehouseNextHopsEntity(null, hop.getTraveltimeMins(),warehouseEntity));

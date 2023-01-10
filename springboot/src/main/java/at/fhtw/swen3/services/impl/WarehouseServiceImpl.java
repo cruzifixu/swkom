@@ -62,13 +62,15 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public List<Warehouse> exportWarehouses() {
-        return null;
+    public Warehouse exportWarehouses() {
+        WarehouseEntity warehouseEntity = warehouseRepository.findByLevel(0);
+        WarehouseMapperImpl warehouseMapper = new WarehouseMapperImpl();
+        return warehouseMapper.entityToDto(warehouseEntity);
     }
 
     @Override
-    public Warehouse getWarehouse() throws SQLException {
-        WarehouseEntity warehouseEntity = warehouseRepository.findByLevel(0);
+    public Warehouse getWarehouse(String code) throws SQLException {
+        WarehouseEntity warehouseEntity = warehouseRepository.findByCode(code);
         WarehouseMapperImpl warehouseMapper = new WarehouseMapperImpl();
         return warehouseMapper.entityToDto(warehouseEntity);
     }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 
 
 @Entity
