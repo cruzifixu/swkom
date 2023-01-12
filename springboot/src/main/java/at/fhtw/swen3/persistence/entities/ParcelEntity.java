@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = "t_parcel")
 public class ParcelEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column

@@ -10,6 +10,7 @@ at\fhtw\swen3\services\mapper\WarehouseMapperImpl.class
 at\fhtw\swen3\services\mapper\Mapper.class
 at\fhtw\swen3\configuration\SpringDocConfiguration.class
 at\fhtw\swen3\persistence\entities\TruckEntity$TruckEntityBuilder.class
+at\fhtw\swen3\controller\GlobalExceptionHandler.class
 at\fhtw\swen3\services\impl\GeoCoordinateServiceImpl.class
 at\fhtw\swen3\services\mapper\TransferwarehouseMapper.class
 at\fhtw\swen3\services\mapper\GeoCoordinateMapper.class
