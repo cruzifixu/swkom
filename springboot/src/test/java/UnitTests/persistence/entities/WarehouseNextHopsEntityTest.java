@@ -1,5 +1,7 @@
-package at.fhtw.swen3.persistence.entities;
+package UnitTests.persistence.entities;
 
+import at.fhtw.swen3.persistence.entities.HopEntity;
+import at.fhtw.swen3.persistence.entities.WarehouseNextHopsEntity;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

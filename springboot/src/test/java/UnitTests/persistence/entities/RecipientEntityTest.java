@@ -1,5 +1,7 @@
-package at.fhtw.swen3.persistence.entities;
+package UnitTests.persistence.entities;
 
+import at.fhtw.swen3.persistence.entities.GeoCoordinateEntity;
+import at.fhtw.swen3.persistence.entities.RecipientEntity;
 import at.fhtw.swen3.services.dto.GeoCoordinate;
 import org.junit.jupiter.api.Test;
 
