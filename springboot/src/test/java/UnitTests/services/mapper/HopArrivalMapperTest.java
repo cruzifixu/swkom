@@ -1,7 +1,8 @@
-package at.fhtw.swen3.services.mapper;
+package UnitTests.services.mapper;
 
 import at.fhtw.swen3.persistence.entities.HopArrivalEntity;
 import at.fhtw.swen3.services.dto.HopArrival;
+import at.fhtw.swen3.services.mapper.HopArrivalMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

@@ -1,5 +1,6 @@
-package at.fhtw.swen3.persistence.entities;
+package UnitTests.persistence.entities;
 
+import at.fhtw.swen3.persistence.entities.TruckEntity;
 import org.geolatte.geom.Geometry;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,8 @@
-package at.fhtw.swen3.persistence.entities;
+package UnitTests.persistence.entities;
 
 import static org.assertj.core.api.Assertions.*;
 
+import at.fhtw.swen3.persistence.entities.TransferwarehouseEntity;
 import org.geolatte.geom.Geometry;
 import org.junit.jupiter.api.Test;
 

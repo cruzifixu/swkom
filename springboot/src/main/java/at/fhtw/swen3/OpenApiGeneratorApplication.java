@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@ComponentScan(basePackages = {"org.openapitools", "at.fhtw.swen3.services" , "at.fhtw.swen3.configuration","at.fhtw.swen3.persistence","at.fhtw.swen3.controller"})
+@ComponentScan(basePackages = {"org.openapitools", "at.fhtw.swen3.services" , "at.fhtw.swen3.configuration","at.fhtw.swen3.persistence","at.fhtw.swen3.controller", "at.fhtw.swen3.gps"})
 public class OpenApiGeneratorApplication {
 
     public static void main(String[] args)

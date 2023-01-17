@@ -1,4 +1,4 @@
-package at.fhtw.swen3.gps.service.impl;
+package UnitTests.gps.service.impl;
 
 
 import at.fhtw.swen3.model.Address;

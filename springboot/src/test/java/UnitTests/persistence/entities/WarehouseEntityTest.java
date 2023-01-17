@@ -1,5 +1,7 @@
-package at.fhtw.swen3.persistence.entities;
+package UnitTests.persistence.entities;
 
+import at.fhtw.swen3.persistence.entities.WarehouseEntity;
+import at.fhtw.swen3.persistence.entities.WarehouseNextHopsEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
