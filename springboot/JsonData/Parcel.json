@@ -1,15 +1,17 @@
-{"weight": 992,
+{
+  "weight": 50,
   "recipient": {
-    "name": "Mala Mostafa",
-    "street": "Luxemburgerstrasse 6",
-    "postalCode": "1010",
+    "name": "hey",
+    "street": "Lerchenfelderstrasse 10",
+    "postalCode": "1070",
     "city": "Vienna",
     "country": "Austria"
   },
   "sender": {
-    "name": "Henlo Melon",
-    "street": "Leobendorferstraße 1",
-    "postalCode": "2111",
-    "city": "Trostdorf",
+    "name": "bro",
+    "street": "Hauptplatz 27",
+    "postalCode": "2700",
+    "city": "Wiener Neustadt",
     "country": "Austria"
-  }}
+  }
+}
